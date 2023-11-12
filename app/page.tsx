@@ -1,95 +1,58 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client"
+import {Box, FormControl, FormLabel, Input} from "@mui/joy";
+import {SxProps} from "@mui/system";
+import React, {useState} from "react";
+import WeatherDataOverviewComponent from "@/components/WeatherDataOverviewComponent";
+import PageLayoutComponent from "@/components/shared/PageLayoutComponent";
+import {START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA} from "@/contexts/applicationContext";
 
+const INITIAL_TIMESTAMP = START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA
+
+export type ListEntry = {
+    icon: any
+    value: number
+    unit: string
+}
+export type TemperaturesForPeriodsOfTheDay = {
+    dayPeriod: string
+    value: number
+    unit: string
+}
+export type KeyValue = ListEntry & {
+    title: string
+    description: string
+}
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+    const [selectedDate, setSelectedDate] = useState<string>(INITIAL_TIMESTAMP)
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
+    return (
+        <PageLayoutComponent title={"Vorhersage"}>
+            <FormControl size="sm" sx={dateInput}>
+                <FormLabel>Datum</FormLabel>
+                <Input
+                    type="date"
+                    defaultValue={new Date(selectedDate).toLocaleString("en-US", {year: "numeric", month: "2-digit", day: "2-digit"})}
+                    placeholder="Datum auswählen"
+                    size="md"
+                    slotProps={{
+                        input: {
+                            min: "2022-09-07T00:00",
+                            max: "2022-09-31T00:00",
+                        },
+                    }}
+                    onChange={(e) => setSelectedDate(e.target.value)}
+                />
+            </FormControl>
+            <WeatherDataOverviewComponent selectedDate={new Date(selectedDate)}/>
+        </PageLayoutComponent>
+    )
+}
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+const dateInput: SxProps = {
+    width: {
+        lg: "300px",
+        xs: "100%",
+    },
+    justifySelf: "start",
 }
