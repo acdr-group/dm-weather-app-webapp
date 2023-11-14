@@ -1,7 +1,7 @@
 "use client"
-import React from 'react';
+import React, {PropsWithChildren, useEffect, useState} from 'react';
 import PageLayoutComponent from "@/components/shared/PageLayoutComponent";
-import {Box, Stack} from "@mui/joy";
+import {Box, Button, Stack, Theme, useColorScheme} from "@mui/joy";
 import Typography from "@mui/joy/Typography";
 import List from '@mui/joy/List';
 import ListDivider from '@mui/joy/ListDivider';
@@ -17,10 +17,14 @@ import StorageIcon from '@mui/icons-material/Storage';
 import SatelliteAltOutlinedIcon from '@mui/icons-material/SatelliteAltOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import NewReleasesOutlinedIcon from '@mui/icons-material/NewReleasesOutlined';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import {useCustomThemeContext} from "@/contexts/themeContext";
+import Input from '@mui/joy/Input';
+import {customThemes} from "@/theme/customThemes";
 
-type Props = {
-
-}
+type Props = {}
 
 const SettingPage: React.FC<Props> = (props: Props) => {
     return (
@@ -32,214 +36,211 @@ const SettingPage: React.FC<Props> = (props: Props) => {
     )
 }
 
-function ThemeSettings() {
-    const theme = useTheme()
-
+type SettingItem = {
+    icon: React.ReactNode,
+    label: string,
+    value: React.ReactNode,
+}
+type PropsSettingSection = {
+    sectionTitle: string
+    settingItemList: SettingItem[]
+}
+const SettingSectionComponent: React.FC<PropsSettingSection> = (props: PropsSettingSection) => {
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexWrap: 'wrap',
-                gap: 4,
-            }}
-        >
-            {([undefined] as const).map(
-                (inset) => (
-                    <div key={inset || 'default'}>
-                        <Typography level="body-lg" mb={2}>
-                            Farbshema
-                        </Typography>
-                        <List
-                            variant="outlined"
-                            sx={{
-                                minWidth: 240,
-                                borderRadius: 'md',
-                            }}
-                        >
-                            <ListItem
-                                endAction={
-                                    <Stack direction={"row"} spacing={2} alignItems={"center"} sx={{
-                                        px: 3
-                                    }}>
-                                        <Typography>{theme.palette.primary[500]}</Typography>
-                                        <Box sx={{
-                                            backgroundColor: theme.vars.palette.primary[500],
-                                            height: 30,
-                                            width: 30,
-                                            borderRadius: "20%",
-                                        }}></Box>
-                                    </Stack>
-                                }
-                                sx={listItem}
-                            >
-                                <ListItemDecorator>
-                                    <PaletteOutlinedIcon/>
-                                </ListItemDecorator>
-                                Hauptfarbe
+        <Box sx={settingSectionContainer}>
+            <Box component="div">
+                <Typography level="body-lg" sx={sectionHeader}>{props.sectionTitle}</Typography>
+                <List variant="outlined" sx={settingSectionItemListContainer}>
+                    {props.settingItemList.map((item, index, arr) =>
+                        <>
+                            <ListItem key={item.label} endAction={item.value} sx={listItem}>
+                                <ListItemDecorator>{item.icon}</ListItemDecorator>
+                                <Typography>{item.label}</Typography>
                             </ListItem>
-                            <ListDivider inset={inset} />
-                            <ListItem
-                                sx={listItem}
-                                endAction={
-                                    <Switch
-                                        sx={{
-                                            px: 3,
-                                            '--Switch-thumbSize': '27px',
-                                            '--Switch-trackWidth': '50px',
-                                            '--Switch-trackHeight': '25px',
-                                        }}
-                                    />
-                                }
-                            >
-                                <ListItemDecorator>
-                                    <LightModeOutlinedIcon/>
-                                </ListItemDecorator>
-                                Modus
-                            </ListItem>
-                        </List>
-                    </div>
-                ),
-            )}
+                            {index !== arr.length - 1 ? <ListDivider inset={undefined} /> : null}
+                        </>
+                    )}
+                </List>
+            </Box>
         </Box>
     )
 }
 
 const DataSourceSettings: React.FC = () => {
+
     const theme = useTheme()
 
+    const settingItemList: SettingItem[] = [
+        {
+            icon: <SouthAmericaIcon/>,
+            label: "Anzeigeregion",
+            value: <ValueContent>Karlsruhe</ValueContent>,
+        },
+        {
+            icon: <StorageIcon/>,
+            label: "Datenherkunft",
+            value: <ValueContent>Heidelberg Universität</ValueContent>,
+        },
+        {
+            icon: <SatelliteAltOutlinedIcon/>,
+            label: "Wetterstation",
+            value: <ValueContent>Karlsruhe dmTECH</ValueContent>,
+        },
+    ]
+
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexWrap: 'wrap',
-                gap: 4,
-            }}
-        >
-            {([undefined] as const).map(
-                (inset) => (
-                    <div key={inset || 'default'}>
-                        <Typography level="body-lg" mb={2}>
-                            Datenquelle
-                        </Typography>
-                        <List
-                            variant="outlined"
-                            sx={{
-                                minWidth: 240,
-                                borderRadius: 'md',
-                            }}
-                        >
-                            <ListItem
-                                endAction={
-                                    <Box sx={{ px: 3}}>
-                                        <Typography>Karlsruhe</Typography>
-                                    </Box>
-                                }
-                                sx={listItem}
-                            >
-                                <ListItemDecorator>
-                                    <SouthAmericaIcon/>
-                                </ListItemDecorator>
-                                Anzeigeregion
-                            </ListItem>
-                            <ListDivider inset={inset} />
-                            <ListItem
-                                sx={listItem}
-                                endAction={
-                                    <Box sx={{ px: 3}}>
-                                        <Typography>Heidelberg Universität</Typography>
-                                    </Box>
-                                }
-                            >
-                                <ListItemDecorator>
-                                    <StorageIcon/>
-                                </ListItemDecorator>
-                                Datenherkunft
-                            </ListItem>
-                            <ListDivider inset={inset} />
-                            <ListItem
-                                sx={listItem}
-                                endAction={
-                                    <Box sx={{ px: 3}}>
-                                        <Typography>Karlsruhe dmTECH</Typography>
-                                    </Box>
-                                }
-                            >
-                                <ListItemDecorator>
-                                    <SatelliteAltOutlinedIcon/>
-                                </ListItemDecorator>
-                                Wetterstation
-                            </ListItem>
-                        </List>
-                    </div>
-                ),
-            )}
-        </Box>
+        <SettingSectionComponent
+            sectionTitle={"Datenquelle"}
+            settingItemList={settingItemList}
+        />
+    )
+}
+
+const ThemeSettings: React.FC = () => {
+
+    const theme = useTheme()
+    const { mode, setMode } = useColorScheme()
+
+    const {
+        currentTheme,
+        setThemeByThemeName,
+    } = useCustomThemeContext()
+
+    const [selectedThemeName, setSelectedThemeName] = useState<string | undefined>(currentTheme?.name)
+
+    useEffect(() => {
+        setThemeByThemeName(selectedThemeName!)
+    }, [selectedThemeName])
+
+    const toggleMode = () => {
+        setMode(mode === "dark" ? "light" : "dark")
+    }
+
+    const settingItemList: SettingItem[] = [
+        {
+            icon: <PaletteOutlinedIcon/>,
+            label: "Hauptfarbe",
+            value: (
+                <ValueContent>
+                    <Stack direction={"row"} spacing={2} alignItems={"center"}>
+                        <Select defaultValue={currentTheme?.name} onChange={(_, value) => setSelectedThemeName(value!)}>
+                            {customThemes.map(theme =>
+                                <Option key={theme.name} value={theme.name}>
+                                    {theme.name}
+                                </Option>
+                            )}
+                        </Select>
+                        <Box sx={colorIndicator}></Box>
+                    </Stack>
+                </ValueContent>
+            ),
+        },
+        {
+            icon:  <LightModeOutlinedIcon/>,
+            label: "Dunkel-Modus",
+            value: (
+                <ValueContent>
+                    <Switch checked={mode === "dark"} onClick={toggleMode} sx={switchStyle}/>
+                </ValueContent>
+            ),
+        },
+        {
+            icon: <LanguageOutlinedIcon/>,
+            label: "Sprache",
+            value: (
+                <ValueContent>
+                    {/*TODO: Implement switching language!*/}
+                    <Select defaultValue="Deutsch" onChange={() => alert("This feature is in development!")}>
+                        <Option value="Deutsch">Deutsch</Option>
+                        <Option value="Englisch">Englisch</Option>
+                    </Select>
+                </ValueContent>
+            )
+        },
+    ]
+
+    return (
+        <SettingSectionComponent
+            sectionTitle={"Darstellung"}
+            settingItemList={settingItemList}
+        />
     )
 }
 
 const AppInfo: React.FC = () => {
     const theme = useTheme()
 
+    const settingItemList: SettingItem[] =[
+        {
+            icon: <InfoOutlinedIcon/>,
+            label: "App-Version",
+            value: <ValueContent>1.0.0</ValueContent>,
+        },
+        {
+            icon: <NewReleasesOutlinedIcon/>,
+            label: "Letzter Release",
+            value: <ValueContent>01.01.2024</ValueContent>,
+        },
+    ]
+
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexWrap: 'wrap',
-                gap: 4,
-            }}
-        >
-            {([undefined] as const).map(
-                (inset) => (
-                    <div key={inset || 'default'}>
-                        <Typography level="body-lg" mb={2}>
-                            Anwendungsstammdaten
-                        </Typography>
-                        <List
-                            variant="outlined"
-                            sx={{
-                                minWidth: 240,
-                                borderRadius: 'md',
-                            }}
-                        >
-                            <ListItem
-                                endAction={
-                                    <Box sx={{ px: 3}}>
-                                        <Typography>1.0.0</Typography>
-                                    </Box>
-                                }
-                                sx={listItem}
-                            >
-                                <ListItemDecorator>
-                                    <InfoOutlinedIcon/>
-                                </ListItemDecorator>
-                                App-Version
-                            </ListItem>
-                            <ListDivider inset={inset} />
-                            <ListItem
-                                sx={listItem}
-                                endAction={
-                                    <Box sx={{ px: 3}}>
-                                        <Typography>01.01.2024</Typography>
-                                    </Box>
-                                }
-                            >
-                                <ListItemDecorator>
-                                    <NewReleasesOutlinedIcon/>
-                                </ListItemDecorator>
-                                Letzter Release
-                            </ListItem>
-                        </List>
-                    </div>
-                ),
-            )}
-        </Box>
+        <SettingSectionComponent
+            sectionTitle={"Anwendungsstammdaten"}
+            settingItemList={settingItemList}
+        />
     )
 }
+
+const settingSectionContainer: SxProps = {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'wrap',
+    gap: 4,
+}
+const settingSectionItemListContainer: SxProps = {
+    minWidth: 240,
+    borderRadius: 'md',
+}
 const listItem: SxProps = {
-    px: 3,
+    px: {
+        lg: 3,
+        md: 2.2,
+        sm: 2.2,
+    },
     py: 2,
+}
+const sectionHeader: SxProps = {
+    color: "grey",
+    mb: 2,
+}
+const switchStyle: SxProps = {
+    '--Switch-thumbSize': '27px',
+    '--Switch-trackWidth': '50px',
+    '--Switch-trackHeight': '25px',
+}
+const colorIndicator: SxProps<Theme> = {
+    display: {
+        lg: "block",
+        xs: "none",
+    },
+    backgroundColor: theme => theme.vars.palette.primary[500],
+    height: 30,
+    width: 30,
+    borderRadius: "20%",
+    cursor: "pointer",
+}
+const valueContentStyle: SxProps = {
+    px: {
+        lg: 3,
+        md: 1,
+        xs: 1,
+    },
+}
+const ValueContent = (props: PropsWithChildren) => {
+    return (
+        <Box sx={valueContentStyle}>
+            {props.children}
+        </Box>
+    )
 }
 export default SettingPage

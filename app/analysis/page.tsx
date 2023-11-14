@@ -91,6 +91,26 @@ const AnalysisPage: React.FC<Props> = (props: Props) => {
     return (
         <PageLayoutComponent title={"Analysen"}>
             <Box sx={filtersContainer}>
+                <FormControl size="sm" sx={sensorInput}>
+                    <FormLabel>Sensor</FormLabel>
+                    <Select
+                        defaultValue={selectedSensor.name}
+                        value={selectedSensor.name}
+                        onChange={(_, value) => handleSensorChange(value!)}
+                        slotProps={{
+                            listbox: {
+                                variant: 'outlined',
+                            },
+                        }}
+                        sx={sensorDropdown}
+                    >
+                        {mappedSensorIdWithNameList.map(sensor =>
+                            <Option key={sensor.id} value={sensor.name}>
+                                {sensor.name}
+                            </Option>
+                        )}
+                    </Select>
+                </FormControl>
                 <FormControl size="sm" sx={dateInput}>
                     <FormLabel>Ab</FormLabel>
                     <Input
@@ -115,26 +135,6 @@ const AnalysisPage: React.FC<Props> = (props: Props) => {
                         onChange={(e) => setEndDate(new Date(e.target.value).toISOString())}
                     />
                 </FormControl>
-                <FormControl size="sm" sx={dateInput}>
-                    <FormLabel>Sensor</FormLabel>
-                    <Select
-                        defaultValue={selectedSensor.name}
-                        value={selectedSensor.name}
-                        onChange={(_, value) => handleSensorChange(value!)}
-                        slotProps={{
-                            listbox: {
-                                variant: 'outlined',
-                            },
-                        }}
-                        sx={sensorDropdown}
-                    >
-                        {mappedSensorIdWithNameList.map(sensor =>
-                            <Option key={sensor.id} value={sensor.name}>
-                                {sensor.name}
-                            </Option>
-                        )}
-                    </Select>
-                </FormControl>
             </Box>
             <SensorChartDataResolverComponent
                 startDate={new Date(startDate)}
@@ -153,12 +153,18 @@ const AnalysisPage: React.FC<Props> = (props: Props) => {
                             },
                             height: "420px",
                         }}>
-                            <Typography level={"title-lg"}>{getChartName(sensorMeasuremnt.id as unknown as SensorId)}</Typography>
+                            <Box component="div">
+                                <Typography level={"title-lg"}>
+                                    {getChartName(sensorMeasuremnt.id as unknown as SensorId)}
+                                </Typography>
+                                <Typography level={"title-md"}>Einheit in {sensorMeasuremnt.unit}</Typography>
+                            </Box>
                             <ChartComponent
                                 dataSet={chartDataSet}
-                                horizontalAxisLabel={"Datum"}
+                                horizontalAxisLabel={"Zeitspanne"}
                                 verticalAxisLabel={getChartName(sensorMeasuremnt.id as unknown as SensorId)}
                                 chartTitle={getChartName(sensorMeasuremnt.id as unknown as SensorId)}
+                                unit={sensorMeasuremnt.unit}
                             />
                         </Card>
                         <KeyValueCardListComponent
@@ -173,10 +179,15 @@ const AnalysisPage: React.FC<Props> = (props: Props) => {
 
 const dateInput: SxProps = {
     width: {
-        lg: "200px",
+        lg: "250px",
         xs: "100%",
     },
     justifySelf: "start",
+}
+const sensorInput: SxProps = {
+    ...dateInput,
+    flex: 1,
+    height: "100%",
 }
 const filtersContainer: SxProps = {
     display: "flex",
@@ -185,10 +196,11 @@ const filtersContainer: SxProps = {
         md: "column",
         xs: "column",
     },
+    alignContent: "stretch",
+    alignItems: "stretch",
     gap: 2,
 }
 const sensorDropdown: SxProps = {
-    mr: -1.5,
     '&:hover': {
         bgcolor: 'transparent',
     },

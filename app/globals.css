@@ -105,13 +105,3 @@ a {
     color-scheme: dark;
   }
 }
-
-/* Custom Animations */
-@keyframes scrollAnimation {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
