@@ -9,6 +9,7 @@ import {Box} from "@mui/joy";
 import SideNavigationComponent from "@/components/SideNavigationComponent";
 import {SxProps} from "@mui/system";
 import {ApplicationContextProvider} from "@/contexts/applicationContext";
+import {CustomThemeContextProvider} from "@/contexts/themeContext";
 
 const inter = Inter({
     subsets: ['latin'],
@@ -31,17 +32,19 @@ export default function RootLayout(props: Props) {
         <html lang="en">
         <body className={inter.className}>
         <ApplicationContextProvider>
-            <ThemeRegistry options={{ key: 'joy' }}>
-                <Box sx={pageWrapper}>
-                    <HeaderComponent/>
-                    <Box sx={SideNavAndMainContent}>
-                        <SideNavigationComponent/>
-                        <Box component="main" sx={mainContent}>
-                            <Box sx={pageContent}>{props.children}</Box>
+            <CustomThemeContextProvider>
+                <ThemeRegistry options={{ key: 'joy' }}>
+                    <Box sx={pageWrapper} id="mode-toggle">
+                        <HeaderComponent/>
+                        <Box sx={sideNavAndMainContent}>
+                            <SideNavigationComponent/>
+                            <Box component="main" sx={mainContent}>
+                                <Box sx={pageContent}>{props.children}</Box>
+                            </Box>
                         </Box>
                     </Box>
-                </Box>
-            </ThemeRegistry>
+                </ThemeRegistry>
+            </CustomThemeContextProvider>
         </ApplicationContextProvider>
         </body>
         </html>
@@ -53,7 +56,7 @@ const pageWrapper: SxProps = {
     height: "100vh",
     gridTemplateRows: "max-content 1fr",
 }
-const SideNavAndMainContent: SxProps = {
+const sideNavAndMainContent: SxProps = {
     display: "grid",
     gridTemplateColumns: {
         lg: "max-content 1fr",

@@ -2,18 +2,16 @@
 import React, {useState} from 'react';
 import {ColorPaletteProp} from '@mui/joy/styles';
 import Box from '@mui/joy/Box';
-import Chip from '@mui/joy/Chip';
 import List from '@mui/joy/List';
-import {Button} from "@mui/joy";
+import {Theme} from "@mui/joy";
 import ListItemButton from '@mui/joy/ListItemButton';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import Sheet from '@mui/joy/Sheet';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import {SxProps} from "@mui/system";
-import {useRouter, usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 
 type SideNavigationButton = {
     label: string
@@ -26,7 +24,6 @@ const SideNavigationComponent = () => {
 
     const router = useRouter()
     const pathname = usePathname()
-    const [color, setColor] = useState<ColorPaletteProp>('primary')
 
     const sideNavigationButtons: SideNavigationButton[] = [
         {
@@ -63,6 +60,11 @@ const SideNavigationComponent = () => {
                             key={button.label}
                             selected={button.isActive}
                             onClick={button.onClick}
+                            sx={{
+                                py: 1.5,
+                                //border: theme => button.isActive ? `1px solid ${theme.vars.palette.primary[500]}` : "initial",
+                                color: theme => button.isActive ? `${theme.vars.palette.primary[500]}` : "initial"
+                            }}
                             //variant="soft"
                         >
                             <ListItemDecorator>{button.icon}</ListItemDecorator>
@@ -87,11 +89,11 @@ const sideNavigationContainer: SxProps = {
     left: 0,
     bottom: 0,
 }
-const sideNavigationContent: SxProps = {
+const sideNavigationContent: SxProps<Theme> = {
     display: "grid",
     p: 2,
-    bgcolor: "white",
-    borderRight: "0.1px solid #cdd7e1",
+    borderRight: theme => `2.5px solid ${theme.vars.palette.divider}`,
+    backgroundColor: theme => theme.vars.palette.background.body,
 }
 const navigationButtonListContainer: SxProps = {
     '--ListItem-radius': '8px',

@@ -1,8 +1,12 @@
 import React from "react";
-import {ResponsiveLine, Serie} from '@nivo/line'
+import {PointTooltipProps, ResponsiveLine, Serie} from '@nivo/line'
 import {useTheme} from '@mui/joy/styles';
 import ResponsivSizingComponent from "@/components/shared/ResponsivSizingComponent";
-import {Box} from "@mui/joy"
+import {Box, Stack, Theme, useColorScheme} from "@mui/joy"
+import {Theme as NivoTheme} from "@nivo/core";
+import Card from "@mui/joy/Card";
+import Typography from "@mui/joy/Typography";
+import {SxProps} from "@mui/system";
 
 export type ChartDataSeType = {
     x: string,
@@ -13,15 +17,38 @@ type PropsChart = {
     dataSet: ChartDataSeType[]
     verticalAxisLabel: string
     horizontalAxisLabel: string
+    unit: string
 }
 const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
 
     const theme = useTheme()
+    const { mode } = useColorScheme()
 
     const graphData: Serie[] = [{
         id: props.chartTitle,
         data: props.dataSet
     }]
+
+    const chartTheme: NivoTheme = {
+        axis: {
+            ticks: {
+                text: {
+                    fill: mode === "light" ? theme.vars.palette.neutral["700"] : theme.vars.palette.neutral["400"],
+                    fontFamily: "Inter",
+                    outlineColor: "transparent"
+                }
+            },
+            legend: {
+                text: {
+                    fill: mode === "light" ? theme.vars.palette.neutral["700"]  : theme.vars.palette.neutral["400"],
+                    fontFamily: "Inter",
+                    fontWeight: "500",
+                    fontSize: "15px",
+                    outlineColor: "transparent"
+                },
+            }
+        }
+    }
 
     return (
         <ResponsivSizingComponent>
@@ -54,13 +81,15 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                             tickSize: 10,
                             tickPadding: 5,
                             tickRotation: 0,
-                            legend: props.verticalAxisLabel,
                             legendOffset: -45,
                             legendPosition: 'middle',
                         }}
+                        tooltip={
+                            (tooltipProps) => <ChartToolTipComponent point={tooltipProps.point} unit={props.unit}/>
+                        }
                         enablePoints={true}
                         enableCrosshair={true}
-
+                        theme={chartTheme}
                         enableArea={true}
                         colors={theme.vars.palette.primary[500]}
                         pointSize={1}
@@ -79,4 +108,30 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
     )
 }
 
+type PropsChartToolTipComponent = PointTooltipProps & {
+    unit: string
+}
+const ChartToolTipComponent: React.FunctionComponent<PropsChartToolTipComponent> = (props: PropsChartToolTipComponent) => {
+
+    const { point } = props
+    return (
+        <Card orientation="vertical" sx={chartToolTipContainer}>
+            <Stack alignItems="center">
+                <Typography level="body-sm">{point.data.x}</Typography>
+                <Typography level="body-lg" sx={toolTipMainText}>
+                    {`${point.data.y}${props.unit}`}
+                </Typography>
+            </Stack>
+        </Card>
+    )
+}
+
+const chartToolTipContainer: SxProps<Theme> = {
+    px: 2,
+    py: 1,
+}
+const toolTipMainText: SxProps<Theme> = {
+    fontWeight: "700",
+    color: theme => theme.vars.palette.primary[500],
+}
 export default ChartComponent
