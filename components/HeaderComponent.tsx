@@ -11,6 +11,7 @@ import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import {SxProps} from "@mui/system";
 import CompanyLogoComponent from "@/components/shared/CompanyLogoComponent";
+import {Theme} from "@mui/joy";
 
 const HeaderComponent: React.FC = () => {
     const [color, setColor] = useState<ColorPaletteProp>('primary')
@@ -44,7 +45,7 @@ const HeaderComponent: React.FC = () => {
     )
 }
 
-const headerContainer: SxProps = {
+const headerContainer: SxProps<Theme> = {
     display: 'flex',
     alignItems: 'center',
     justifyItems: "space-between",
@@ -57,8 +58,8 @@ const headerContainer: SxProps = {
     right: 0,
     left: 0,
     minWidth: 'min-content',
-    background: (theme: any) =>
-        `linear-gradient(to top, ${theme["vars"].palette["primary"][600]}, ${theme["vars"].palette["primary"][500]})`,
+    background: theme =>
+        `linear-gradient(to top, ${theme.vars.palette.primary[600]}, ${theme.vars.palette.primary[500]})`,
 }
 const searchInput: SxProps = {
     '--Input-paddingInline': '12px',
