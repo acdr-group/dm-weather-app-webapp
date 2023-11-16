@@ -51,21 +51,18 @@ const SideNavigationComponent = () => {
             <Sheet
                 variant="solid"
                 color="neutral"
-                //invertedColors
                 sx={sideNavigationContent}
             >
                 <List sx={navigationButtonListContainer}>
-                    {sideNavigationButtons.map((button, index) =>
+                    {sideNavigationButtons.map((button) =>
                         <ListItemButton
                             key={button.label}
                             selected={button.isActive}
                             onClick={button.onClick}
                             sx={{
                                 py: 1.5,
-                                //border: theme => button.isActive ? `1px solid ${theme.vars.palette.primary[500]}` : "initial",
-                                color: theme => button.isActive ? `${theme.vars.palette.primary[500]}` : "initial"
+                                color: theme => button.isActive ? `${theme.vars.palette.primary[500]}` : "inherit",
                             }}
-                            //variant="soft"
                         >
                             <ListItemDecorator>{button.icon}</ListItemDecorator>
                             {button.label}

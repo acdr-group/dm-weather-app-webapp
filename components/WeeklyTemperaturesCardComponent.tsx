@@ -47,7 +47,6 @@ const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
         try {
             const temperatureValuesResponse = await Promise.all(
                 getDaysBetweenStartAndEndDates().map(day => {
-                    console.log("Date for request: ", day.toISOString())
                     const readingsRequestOptions = {
                         start: day.toISOString(),
                         end: day.toISOString(),
@@ -129,30 +128,30 @@ const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
                 <ErrorComponent message={error.toString()}/> :
                 <>
                     <Stack direction={"column"} spacing={3}>
-                        {sevenDaysTemperatureValues?.map((entry, index, arr) => {
-                                console.log("Entry value: ", entry)
-                                return (
-                                    <>
-                                        <Box key={index} sx={weekListItem}>
-                                            <Box>
-                                                <Typography sx={cardTitle}>{entry.day.toLocaleDateString([], {weekday: "long"})}</Typography>
-                                                <Typography noWrap level="body-sm">{entry.day.toLocaleDateString([], {day: "2-digit", month: "short", year: "numeric"})}</Typography>
-                                            </Box>
-                                            {entry.icon}
-                                            <Box sx={minMaxAverageContainer}>
-                                                <Typography noWrap level="body-sm">{`${entry.min}${entry.unit}`}</Typography>
-                                                <LinearProgress
-                                                    determinate
-                                                    value={entry.avg}
-                                                    size="lg"
-                                                />
-                                                <Typography noWrap level="body-sm">{`${entry.max}${entry.unit}`}</Typography>
-                                            </Box>
-                                        </Box>
-                                        {index !== arr.length - 1 ? <Divider/> : null}
-                                    </>
-                                )
-                            }
+                        {sevenDaysTemperatureValues?.map((entry, index, arr) =>
+                            <>
+                                <Box key={index} sx={weekListItem}>
+                                    <Box>
+                                        <Typography sx={cardTitle}>
+                                            {entry.day.toLocaleDateString([], {weekday: "long"})}
+                                        </Typography>
+                                        <Typography noWrap level="body-sm">
+                                            {entry.day.toLocaleDateString([], {day: "2-digit", month: "short", year: "numeric"})}
+                                        </Typography>
+                                    </Box>
+                                    {entry.icon}
+                                    <Box sx={minMaxAverageContainer}>
+                                        <Typography noWrap level="body-sm">{`${entry.min}${entry.unit}`}</Typography>
+                                        <LinearProgress
+                                            determinate
+                                            value={entry.avg}
+                                            size="lg"
+                                        />
+                                        <Typography noWrap level="body-sm">{`${entry.max}${entry.unit}`}</Typography>
+                                    </Box>
+                                </Box>
+                                {index !== arr.length - 1 ? <Divider/> : null}
+                            </>
                         )}
                     </Stack>
                 </>
@@ -184,9 +183,9 @@ const cardTitle: SxProps = {
     fontWeight: "600",
 }
 const weekListItem: SxProps = {
-    display: "flex",
-    gap: 3,
-    justifyContent: "space-between",
+    display: "grid",
+    gridTemplateColumns: "minmax(50px, 100px) max-content 1fr",
+    gap: 5,
     alignItems: "center",
     alignContent: "center",
 }
@@ -201,6 +200,7 @@ const weatherIcon: SxProps = {
     fontSize: {
         lg: "35px",
         xs: "21px",
-    }
+    },
+    justifySelf: "center",
 }
 export default WeeklyTemperaturesCardComponent

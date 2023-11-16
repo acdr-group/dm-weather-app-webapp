@@ -1,45 +1,51 @@
 "use client"
-import React, {useState} from 'react';
-import {ColorPaletteProp} from '@mui/joy/styles';
-import Badge from '@mui/joy/Badge';
+import React from 'react';
 import Box from '@mui/joy/Box';
 import Input from '@mui/joy/Input';
 import IconButton from '@mui/joy/IconButton';
 import Sheet from '@mui/joy/Sheet';
 import SearchIcon from '@mui/icons-material/Search';
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
-import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import {SxProps} from "@mui/system";
 import CompanyLogoComponent from "@/components/shared/CompanyLogoComponent";
 import {Theme} from "@mui/joy";
+import {useFullScreen} from "@/hooks/useFullScreen";
+import NotificationDrawerComponent from "@/components/NotificationDrawerComponent";
+import {AppNotification} from "@/models/notification";
 
 const HeaderComponent: React.FC = () => {
-    const [color, setColor] = useState<ColorPaletteProp>('primary')
+    const { enterFullScreen } = useFullScreen()
+
+    const notifications: AppNotification[] = [
+        {
+            id: "f01c2015-fb8b-4b0f-ac67-a07fc1b5b55b",
+            title: "Willkommen in der dmTech-Wetter-App",
+            message: "Willkommen! Entdecke das Wetter mit uns – immer aktuell und zuverlässig",
+            type: "info",
+            creationDate: new Date(),
+        },
+    ]
 
     return (
         <Sheet
             variant="solid"
-            color={color}
+            color="primary"
             invertedColors
             sx={headerContainer}
         >
             <CompanyLogoComponent/>
-            <Input
-                placeholder="Search"
-                variant="soft"
-                size="md"
-                startDecorator={<SearchIcon fontSize="small"/>}
-                sx={searchInput}
-            />
+            {/*<Input*/}
+            {/*    placeholder="Search"*/}
+            {/*    variant="soft"*/}
+            {/*    size="md"*/}
+            {/*    startDecorator={<SearchIcon fontSize="small"/>}*/}
+            {/*    sx={searchInput}*/}
+            {/*/>*/}
             <Box sx={iconListContainer}>
-                <IconButton sx={iconButton} size="sm">
+                <IconButton size="sm" onClick={() => enterFullScreen()}>
                     <FullscreenIcon fontSize="small"/>
                 </IconButton>
-                <Badge badgeContent={2} variant="solid" color="danger" size="sm">
-                    <IconButton variant="soft" sx={iconButton} size="sm">
-                        <NotificationsOutlinedIcon fontSize="small" />
-                    </IconButton>
-                </Badge>
+                <NotificationDrawerComponent notifications={notifications}/>
             </Box>
         </Sheet>
     )
@@ -74,9 +80,6 @@ const iconListContainer: SxProps = {
     alignItems: "center",
     alignContent: "center",
     gap: 2,
-}
-const iconButton: SxProps = {
-    borderRadius: "20%",
 }
 
 export default HeaderComponent

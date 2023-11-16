@@ -6,6 +6,7 @@ import Typography from "@mui/joy/Typography";
 import LinearProgress from "@mui/joy/LinearProgress";
 import {SxProps} from "@mui/system";
 import {ListEntry, TemperaturesForPeriodsOfTheDay} from "@/app/page";
+import ReactPlayer from "react-player";
 
 type Props = {
     measurementDate: string
