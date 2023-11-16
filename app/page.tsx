@@ -1,10 +1,11 @@
 "use client"
-import {Box, FormControl, FormLabel, Input} from "@mui/joy";
+import {FormControl, FormLabel, Input} from "@mui/joy";
 import {SxProps} from "@mui/system";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import WeatherDataOverviewComponent from "@/components/WeatherDataOverviewComponent";
 import PageLayoutComponent from "@/components/shared/PageLayoutComponent";
 import {START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA} from "@/contexts/applicationContext";
+import {useFullScreen} from "@/hooks/useFullScreen";
 
 const INITIAL_TIMESTAMP = START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA
 
@@ -20,34 +21,39 @@ export type TemperaturesForPeriodsOfTheDay = {
 }
 export type KeyValue = ListEntry & {
     title: string
-    description: string
+    description?: string
 }
 export default function Home() {
 
+    const ref = useRef<HTMLDivElement | null>(null)
     const [selectedDate, setSelectedDate] = useState<string>(INITIAL_TIMESTAMP)
+    const { isFullScreen } = useFullScreen()
 
     return (
-        <PageLayoutComponent title={"Vorhersage"}>
-            <FormControl size="sm" sx={dateInput}>
-                <FormLabel>Datum</FormLabel>
-                <Input
-                    type="date"
-                    defaultValue={new Date(selectedDate).toLocaleString("en-US", {year: "numeric", month: "2-digit", day: "2-digit"})}
-                    placeholder="Datum auswählen"
-                    size="md"
-                    slotProps={{
-                        input: {
-                            min: "2022-09-07T00:00",
-                            max: "2022-09-31T00:00",
-                        },
-                    }}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                />
-            </FormControl>
+        <PageLayoutComponent title={isFullScreen ? undefined : "Vorhersage"}>
+            {isFullScreen ? null :
+                <FormControl size="sm" sx={dateInput}>
+                    <FormLabel>Datum</FormLabel>
+                    <Input
+                        type="date"
+                        defaultValue={new Date(selectedDate).toLocaleString("en-US", {year: "numeric", month: "2-digit", day: "2-digit"})}
+                        placeholder="Datum auswählen"
+                        size="md"
+                        slotProps={{
+                            input: {
+                                min: "2022-09-07T00:00",
+                                max: "2022-09-31T00:00",
+                            },
+                        }}
+                        onChange={(e) => setSelectedDate(e.target.value)}
+                    />
+                </FormControl>
+            }
             <WeatherDataOverviewComponent selectedDate={new Date(selectedDate)}/>
         </PageLayoutComponent>
     )
 }
+
 
 const dateInput: SxProps = {
     width: {

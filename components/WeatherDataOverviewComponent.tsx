@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {forwardRef, useEffect} from 'react';
 import {Box} from "@mui/joy";
 import {SensorId} from "@/models/sensor";
 import {useApplicationContext} from "@/contexts/applicationContext";
@@ -21,7 +21,7 @@ type Props = {
     selectedDate: Date
 }
 
-const WeatherDataOverviewComponent: React.FC<Props> = (props: Props) => {
+const WeatherDataOverviewComponent = forwardRef((props: Props, ref) => {
 
     const { selectedDate } = props
 
@@ -119,35 +119,30 @@ const WeatherDataOverviewComponent: React.FC<Props> = (props: Props) => {
         return [
             {
                 title: "Windgeschwindigkeit",
-                description: "Wie schnell ist der Wind",
                 value: getWeatherKeyValueBySensorId(SensorId.WIND_SPEED).avg,
                 unit: getWeatherKeyValueBySensorId(SensorId.WIND_SPEED).unit,
                 icon: <WifiTetheringOutlinedIcon/>,
             },
             {
                 title: "Windrichtung",
-                description: "Lorem ipsum dolor sit amet,",
                 value: getWeatherKeyValueBySensorId(SensorId.WIND_DIRECTION).avg,
                 unit: getWeatherKeyValueBySensorId(SensorId.WIND_DIRECTION).unit,
                 icon: <WifiTetheringOutlinedIcon/>,
             },
             {
                 title: "Niederschlag",
-                description: "Lorem ipsum dolor sit amet, dolor sit am",
                 value: getWeatherKeyValueBySensorId(SensorId.PRECIPITATION_AMOUNT).avg,
                 unit: getWeatherKeyValueBySensorId(SensorId.PRECIPITATION_AMOUNT).unit,
                 icon: <WaterDropOutlinedIcon/>,
             },
             {
                 title: "Feuchtigkeit",
-                description: "Lorem ipsum dolor sit amet, dolor sit am, sed diam",
                 value: getWeatherKeyValueBySensorId(SensorId.AIR_HUMIDITY).avg,
                 unit: getWeatherKeyValueBySensorId(SensorId.AIR_HUMIDITY).unit,
                 icon: <OpacityOutlinedIcon/>,
             },
             {
                 title: "Luftdruck",
-                description: "Lorem ipsum dolor sit amet",
                 value: getWeatherKeyValueBySensorId(SensorId.AIR_PRESSURE).avg,
                 unit: getWeatherKeyValueBySensorId(SensorId.AIR_PRESSURE).unit,
                 icon: <CompressOutlinedIcon/>,
@@ -160,24 +155,26 @@ const WeatherDataOverviewComponent: React.FC<Props> = (props: Props) => {
     if (error) return <ErrorComponent message={error.toString()}/>
 
     return (
-        <Box sx={overviewWrapper}>
-            <Box sx={overviewCardAndFilterContainer}>
-                <OverviewCardComponent
-                    measurementDate={props.selectedDate.toLocaleDateString()}
-                    overviewValues={getOverviewValues(getWeatherKeyValue)}
-                    averageDayTemperatureAndUnit={`${getWeatherKeyValue(SensorId.AIR_TEMPERATURE).avg}${getWeatherKeyValue(SensorId.AIR_TEMPERATURE).unit}`}
-                    temperaturesForPeriodsOfTheDay={getTemperaturesForPeriodsOfTheDay(getWeatherKeyValue, data.time)}
-                />
-                <TwentyFourHoursTemperatureComponent
-                    hours={data.time}
-                    values={getWeatherKeyValue(SensorId.AIR_TEMPERATURE).values}
-                />
-                <KeyValueCardListComponent keyValues={getKeyValues(getWeatherKeyValue)}/>
+        <Box ref={ref}>
+            <Box sx={overviewWrapper}>
+                <Box sx={overviewCardAndFilterContainer}>
+                    <OverviewCardComponent
+                        measurementDate={props.selectedDate.toLocaleDateString()}
+                        overviewValues={getOverviewValues(getWeatherKeyValue)}
+                        averageDayTemperatureAndUnit={`${getWeatherKeyValue(SensorId.AIR_TEMPERATURE).avg}${getWeatherKeyValue(SensorId.AIR_TEMPERATURE).unit}`}
+                        temperaturesForPeriodsOfTheDay={getTemperaturesForPeriodsOfTheDay(getWeatherKeyValue, data.time)}
+                    />
+                    <TwentyFourHoursTemperatureComponent
+                        hours={data.time}
+                        values={getWeatherKeyValue(SensorId.AIR_TEMPERATURE).values}
+                    />
+                    <KeyValueCardListComponent keyValues={getKeyValues(getWeatherKeyValue)}/>
+                </Box>
+                <WeeklyTemperaturesCardComponent/>
             </Box>
-            <WeeklyTemperaturesCardComponent/>
         </Box>
     )
-}
+})
 
 const overviewWrapper: SxProps = {
     display: "grid",

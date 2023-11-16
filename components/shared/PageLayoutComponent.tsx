@@ -4,14 +4,17 @@ import {SxProps} from "@mui/system";
 import Typography from "@mui/joy/Typography";
 
 type Props = PropsWithChildren & {
-    title: string
+    title?: string
     subtitle?: string
 }
 const PageLayoutComponent: React.FC<Props> = (props: Props) => {
     return (
         <Box sx={pageWrapper}>
             <Box>
-                <Typography level="h3">{props.title}</Typography>
+                {props.title ?
+                    <Typography level="h3">{props.title}</Typography>
+                    : null
+                }
                 {props.subtitle ?
                     <Typography level="body-lg">{props.subtitle}</Typography>
                     : null

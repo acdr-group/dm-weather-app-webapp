@@ -1,3 +1,4 @@
+"use client"
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 //import './globals.css'
@@ -10,6 +11,7 @@ import SideNavigationComponent from "@/components/SideNavigationComponent";
 import {SxProps} from "@mui/system";
 import {ApplicationContextProvider} from "@/contexts/applicationContext";
 import {CustomThemeContextProvider} from "@/contexts/themeContext";
+import {useFullScreen} from "@/hooks/useFullScreen";
 
 const inter = Inter({
     subsets: ['latin'],
@@ -17,7 +19,7 @@ const inter = Inter({
     adjustFontFallback: true,
 })
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
     title: 'Weather App dmTECH',
     description: 'Weather app dmTECH',
     applicationName: 'Weather App dmTECH',
@@ -28,6 +30,8 @@ export const metadata: Metadata = {
 
 type Props = PropsWithChildren & {}
 export default function RootLayout(props: Props) {
+    const { isFullScreen } = useFullScreen()
+
     return (
         <html lang="en">
         <body className={inter.className}>
@@ -35,9 +39,21 @@ export default function RootLayout(props: Props) {
             <CustomThemeContextProvider>
                 <ThemeRegistry options={{ key: 'joy' }}>
                     <Box sx={pageWrapper} id="mode-toggle">
-                        <HeaderComponent/>
-                        <Box sx={sideNavAndMainContent}>
-                            <SideNavigationComponent/>
+                        {isFullScreen ? null : <HeaderComponent/>}
+                        <Box sx={{
+                            display: "grid",
+                            gridTemplateColumns: {
+                                lg: isFullScreen ? "1fr" : "max-content 1fr",
+                                xs: "1fr",
+                            },
+                            position: "sticky",
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                            overflow: "hidden",
+                        }}>
+                            {isFullScreen ? null : <SideNavigationComponent/>}
                             <Box component="main" sx={mainContent}>
                                 <Box sx={pageContent}>{props.children}</Box>
                             </Box>
@@ -55,19 +71,6 @@ const pageWrapper: SxProps = {
     display: "grid",
     height: "100vh",
     gridTemplateRows: "max-content 1fr",
-}
-const sideNavAndMainContent: SxProps = {
-    display: "grid",
-    gridTemplateColumns: {
-        lg: "max-content 1fr",
-        xs: "1fr",
-    },
-    position: "sticky",
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
-    overflow: "hidden",
 }
 const mainContent: SxProps = {
     display: "grid",
