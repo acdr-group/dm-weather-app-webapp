@@ -41,8 +41,8 @@ const TwentyFourHoursTemperatureComponent: React.FC<Props> = (props: Props) => {
     }, [props.hours, props.values])
 
     return (
-        <Card orientation="horizontal" ref={ref} sx={cardContainer}>
-            <Stack direction="row" sx={cardContent}>
+        <Card orientation="horizontal" ref={ref} sx={cardContainer}data-cy="twenty-four-hours-temperature-wrapper">
+            <Stack direction="row" sx={cardContent} data-cy="twenty-four-hours-temperature-container">
                 {hourlyTemperatures.map((entry, index) =>
                     <Box key={index} sx={dayContainer}>
                         <Typography noWrap>

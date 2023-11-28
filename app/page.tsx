@@ -45,6 +45,7 @@ export default function Home() {
                                 max: "2022-09-31T00:00",
                             },
                         }}
+                        data-cy="date-selection-input"
                         onChange={(e) => setSelectedDate(e.target.value)}
                     />
                 </FormControl>
