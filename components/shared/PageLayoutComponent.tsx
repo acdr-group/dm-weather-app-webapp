@@ -12,7 +12,7 @@ const PageLayoutComponent: React.FC<Props> = (props: Props) => {
         <Box sx={pageWrapper}>
             <Box>
                 {props.title ?
-                    <Typography level="h3">{props.title}</Typography>
+                    <Typography level="h3" data-cy={"page-title"}>{props.title}</Typography>
                     : null
                 }
                 {props.subtitle ?
