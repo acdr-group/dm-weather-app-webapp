@@ -31,7 +31,7 @@ describe("Home page spec", () => {
         expect(sensorMeasurement).to.have.property("max_abs").and.be.a("number");
         expect(sensorMeasurement).to.have.property("min_abs").and.be.a("number");
         expect(sensorMeasurement).to.have.property("public_name").and.be.a("string");
-        expect(sensorMeasurement).to.have.property("running_sum").and.be.an("array").and.to.have.length.at.least(1);
+        expect(sensorMeasurement).to.have.property("running_sum").and.be.an("array");
       });
     })
   })

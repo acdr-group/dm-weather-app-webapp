@@ -102,6 +102,7 @@ const AnalysisPage: React.FC<Props> = (props: Props) => {
                                 variant: 'outlined',
                             },
                         }}
+                        data-cy="sensor-dropdown"
                         sx={sensorDropdown}
                     >
                         {mappedSensorIdWithNameList.map(sensor =>
