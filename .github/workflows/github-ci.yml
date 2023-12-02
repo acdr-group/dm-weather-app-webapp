@@ -24,8 +24,7 @@ jobs:
 
     - name: Build project
       run: |
-        npm install
-        npm build
+        npm run build
 
     - name: Run Tests (End To End Tests)
       run: |
