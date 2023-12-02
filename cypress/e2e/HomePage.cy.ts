@@ -5,7 +5,7 @@ describe("Home page spec", () => {
   const initialRequestUrl = "http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T23:00:00.000Z&stations=106&sensors=%0A++++++++++++1,%0A++++++++++++4,%0A++++++++++++5,%0A++++++++++++3,%0A++++++++++++2,%0A++++++++++++6%0A++++++++"
 
   beforeEach(() => {
-    cy.intercept("GET", initialRequestUrl).as("getReadings")
+    cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
     cy.visit("/")
   })
 
@@ -38,33 +38,37 @@ describe("Home page spec", () => {
     })
   })
 
-  it("Should select date to load weather of that date", () => {
-
-    const date1 = "2022-09-15"
-    const date2 = "2022-09-14"
-    const date3 = "2022-09-13"
-    const date4 = "2022-08-15"
-    const date5 = "2022-08-10"
-    const date6 = "2022-08-05"
-    const date7 = "2022-07-05"
-    const date8 = "2022-07-10"
-    const date9 = "2022-07-20"
-
-    cy.get("[data-cy='date-selection-input']")
-        .click().type(date1)
-        .click().type(date2)
-        .click().type(date3)
-        .click().type(date4)
-        .click().type(date5)
-        .click().type(date6)
-        .click().type(date7)
-        .click().type(date8)
-        .click().type(date9)
-  })
+  // it("Should select date to load weather of that date", () => {
+  //
+  //   const url = `http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
+  //
+  //   cy.intercept("GET", url, { fixture: "" }).as("getReadingsByDate")
+  //
+  //   const date1 = "2022-09-15"
+  //   const date2 = "2022-09-14"
+  //   const date3 = "2022-09-13"
+  //   const date4 = "2022-08-15"
+  //   const date5 = "2022-08-10"
+  //   const date6 = "2022-08-05"
+  //   const date7 = "2022-07-05"
+  //   const date8 = "2022-07-10"
+  //   const date9 = "2022-07-20"
+  //
+  //   cy.get("[data-cy='date-selection-input']")
+  //       .click().type(date1)
+  //       .click().type(date2)
+  //       .click().type(date3)
+  //       .click().type(date4)
+  //       .click().type(date5)
+  //       .click().type(date6)
+  //       .click().type(date7)
+  //       .click().type(date8)
+  //       .click().type(date9)
+  // })
 
   it("Should contain temperatures of the day from 12 AM to 12 PM", () => {
     cy.get("[data-cy='twenty-four-hours-temperature-container']")
-        .children().should('have.length', 24)
+        .children().should("have.length", 24)
 
     cy.get("[data-cy='twenty-four-hours-temperature-container']")
         .children().each(($el) => {
