@@ -1,10 +1,10 @@
 // app/ThemeRegistry.tsx
-'use client';
-import createCache, {Options} from '@emotion/cache';
-import { useServerInsertedHTML } from 'next/navigation';
-import { CacheProvider } from '@emotion/react';
-import { CssVarsProvider } from '@mui/joy/styles';
-import CssBaseline from '@mui/joy/CssBaseline';
+"use client";
+import createCache, {Options} from "@emotion/cache";
+import { useServerInsertedHTML } from "next/navigation";
+import { CacheProvider } from "@emotion/react";
+import { CssVarsProvider } from "@mui/joy/styles";
+import CssBaseline from "@mui/joy/CssBaseline";
 import React, {PropsWithChildren} from "react";
 //import theme from '/path/to/custom/theme'; // OPTIONAL
 
@@ -42,14 +42,14 @@ export default function ThemeRegistry(props: Props) {
         if (names.length === 0) {
             return null;
         }
-        let styles = '';
+        let styles = "";
         for (const name of names) {
             styles += cache.inserted[name];
         }
         return (
             <style
                 key={cache.key}
-                data-emotion={`${cache.key} ${names.join(' ')}`}
+                data-emotion={`${cache.key} ${names.join(" ")}`}
                 dangerouslySetInnerHTML={{
                     __html: styles,
                 }}

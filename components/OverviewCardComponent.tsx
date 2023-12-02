@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {Box} from "@mui/joy";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import Card from "@mui/joy/Card";
@@ -6,7 +6,6 @@ import Typography from "@mui/joy/Typography";
 import LinearProgress from "@mui/joy/LinearProgress";
 import {SxProps} from "@mui/system";
 import {ListEntry, TemperaturesForPeriodsOfTheDay} from "@/app/page";
-import ReactPlayer from "react-player";
 
 type Props = {
     measurementDate: string
@@ -77,7 +76,7 @@ const overviewCardContainer: SxProps = {
         xs: "1fr",
     },
     gap: 5,
-    borderRadius: 'sm',
+    borderRadius: "sm",
 }
 const overviewCardDataColumn: SxProps = {
     display: "grid",
@@ -124,11 +123,11 @@ const overviewValuesContainer: SxProps = {
     gap: 3,
 }
 const linearProgress: SxProps = {
-    '--LinearProgress-radius': '10px',
-    '--LinearProgress-thickness': '15px',
+    "--LinearProgress-radius": "10px",
+    "--LinearProgress-thickness": "15px",
 }
 const linearProgressContent: SxProps = {
-    mixBlendMode: 'difference',
+    mixBlendMode: "difference",
 }
 
 export default OverviewCardComponent

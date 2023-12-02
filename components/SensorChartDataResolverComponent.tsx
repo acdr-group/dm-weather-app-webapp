@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect } from "react";
 import {filterByDistinctDate, useApplicationContext} from "@/contexts/applicationContext";
 import {SensorMeasurement, SensorMeasurementWithTimestamps} from "@/models/sensorMeasurement";
 import {ReadingsQueryParams} from "@/api/reading";

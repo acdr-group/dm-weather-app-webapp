@@ -1,7 +1,7 @@
 "use client"
-import React, {useEffect, useMemo, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import Card from "@mui/joy/Card";
-import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
+import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import {Box, Stack} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import Typography from "@mui/joy/Typography";
@@ -19,7 +19,7 @@ type Props = {
 }
 const TwentyFourHoursTemperatureComponent: React.FC<Props> = (props: Props) => {
 
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement | null>(null)
     const [containerWidth, setWidth] = useState(100 + "%");
     const [animationState, setPlay] = useState("paused");
     useEffect(() => {

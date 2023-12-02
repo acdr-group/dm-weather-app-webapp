@@ -1,4 +1,5 @@
 import {SensorName} from "../../models/sensor";
+import {SensorMeasurement} from "../../models/sensorMeasurement";
 
 describe("Analysis page spec", () => {
 
@@ -21,10 +22,10 @@ describe("Analysis page spec", () => {
         cy.wait("@getReadings").then((interception) => {
 
             expect(interception.request.method).to.equal("GET")
-            expect(interception.response.statusCode).to.equal(200)
-            expect("sensorMeasurements" in interception.response.body).to.be.true;
+            expect(interception.response!.statusCode).to.equal(200)
+            expect("sensorMeasurements" in interception.response!.body).to.be.true;
 
-            interception.response.body.sensorMeasurements.forEach(sensorMeasurement => {
+            interception.response!.body.sensorMeasurements.forEach((sensorMeasurement: SensorMeasurement) => {
                 expect(sensorMeasurement).to.have.property("id").and.be.a("number");
                 expect(sensorMeasurement).to.have.property("avg").and.be.a("number");
                 expect(sensorMeasurement).to.have.property("max").and.be.a("number");

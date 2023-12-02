@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect} from 'react';
+import React, {forwardRef, useEffect} from "react";
 import {Box} from "@mui/joy";
 import {SensorId} from "@/models/sensor";
 import {useApplicationContext} from "@/contexts/applicationContext";
@@ -21,6 +21,7 @@ type Props = {
     selectedDate: Date
 }
 
+// eslint-disable-next-line react/display-name
 const WeatherDataOverviewComponent = forwardRef((props: Props, ref) => {
 
     const { selectedDate } = props

@@ -1,15 +1,15 @@
 "use client"
-import React, {useState} from 'react';
-import {ColorPaletteProp} from '@mui/joy/styles';
-import Box from '@mui/joy/Box';
-import List from '@mui/joy/List';
+import React, {useState} from "react";
+import {ColorPaletteProp} from "@mui/joy/styles";
+import Box from "@mui/joy/Box";
+import List from "@mui/joy/List";
 import {Theme} from "@mui/joy";
-import ListItemButton from '@mui/joy/ListItemButton';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import Sheet from '@mui/joy/Sheet';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import ListItemButton from "@mui/joy/ListItemButton";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
+import Sheet from "@mui/joy/Sheet";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import {SxProps} from "@mui/system";
 import {usePathname, useRouter} from "next/navigation";
 
@@ -27,19 +27,19 @@ const SideNavigationComponent = () => {
 
     const sideNavigationButtons: SideNavigationButton[] = [
         {
-            label: 'Start',
+            label: "Start",
             icon: <HomeOutlinedIcon />,
             isActive: pathname === "/",
             onClick: () => router.push("/"),
         },
         {
-            label: 'Analysen',
+            label: "Analysen",
             icon: <AssessmentOutlinedIcon />,
             isActive: pathname === "/analysis",
             onClick: () => router.push("/analysis"),
         },
         {
-            label: 'Einstellungen',
+            label: "Einstellungen",
             icon: <SettingsOutlinedIcon />,
             isActive: pathname === "/settings",
             onClick: () => router.push("/settings"),
@@ -80,7 +80,7 @@ const sideNavigationContainer: SxProps = {
         lg: "flex",
         xs: "none",
     },
-    overflow: 'auto',
+    overflow: "auto",
     position: "sticky",
     top: 0,
     left: 0,
@@ -93,8 +93,8 @@ const sideNavigationContent: SxProps<Theme> = {
     backgroundColor: theme => theme.vars.palette.background.body,
 }
 const navigationButtonListContainer: SxProps = {
-    '--ListItem-radius': '8px',
-    '--List-gap': '4px',
+    "--ListItem-radius": "8px",
+    "--List-gap": "4px",
     flexGrow: 0,
     minWidth: 200,
 }

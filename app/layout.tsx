@@ -1,8 +1,8 @@
 "use client"
-import type {Metadata} from 'next'
-import {Inter} from 'next/font/google'
+import type {Metadata} from "next"
+import {Inter} from "next/font/google"
 //import './globals.css'
-import '@fontsource/inter';
+import "@fontsource/inter";
 import {PropsWithChildren} from "react";
 import ThemeRegistry from "@/app/ThemeRegistry";
 import HeaderComponent from "@/components/HeaderComponent";
@@ -14,15 +14,15 @@ import {CustomThemeContextProvider} from "@/contexts/themeContext";
 import {useFullScreen} from "@/hooks/useFullScreen";
 
 const inter = Inter({
-    subsets: ['latin'],
+    subsets: ["latin"],
     weight: ["100", "200", "300", "400", "500", "600"],
     adjustFontFallback: true,
 })
 
 const metadata: Metadata = {
-    title: 'Weather App dmTECH',
-    description: 'Weather app dmTECH',
-    applicationName: 'Weather App dmTECH',
+    title: "Weather App dmTECH",
+    description: "Weather app dmTECH",
+    applicationName: "Weather App dmTECH",
     alternates: {
         canonical: "https://fonts.googleapis.com/icon?family=Material+Icons"
     },
@@ -37,7 +37,7 @@ export default function RootLayout(props: Props) {
         <body className={inter.className}>
         <ApplicationContextProvider>
             <CustomThemeContextProvider>
-                <ThemeRegistry options={{ key: 'joy' }}>
+                <ThemeRegistry options={{ key: "joy" }}>
                     <Box sx={pageWrapper} id="mode-toggle">
                         {isFullScreen ? null : <HeaderComponent/>}
                         <Box sx={{

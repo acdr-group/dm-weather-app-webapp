@@ -1,8 +1,8 @@
-import React from 'react';
-import Alert from '@mui/joy/Alert';
-import IconButton from '@mui/joy/IconButton';
-import WarningIcon from '@mui/icons-material/Warning';
-import CloseIcon from '@mui/icons-material/Close';
+import React from "react";
+import Alert from "@mui/joy/Alert";
+import IconButton from "@mui/joy/IconButton";
+import WarningIcon from "@mui/icons-material/Warning";
+import CloseIcon from "@mui/icons-material/Close";
 
 type Props = {
     message: string

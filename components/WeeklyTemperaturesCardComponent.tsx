@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState} from "react";
 import Typography from "@mui/joy/Typography";
 import Card from "@mui/joy/Card";
 import {Box, Divider, Stack} from "@mui/joy";
 import {SxProps} from "@mui/system";
-import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
+import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import LinearProgress from "@mui/joy/LinearProgress";
 import {START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA, useApplicationContext} from "@/contexts/applicationContext";
 import {SensorId} from "@/models/sensor";
@@ -11,6 +11,7 @@ import ErrorComponent from "@/components/shared/ErrorComponent";
 import IconButton from "@mui/joy/IconButton";
 import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import {v4 as uuid} from "uuid"
 
 type TemperatureValuesOfADay = {
     day: Date
@@ -129,8 +130,8 @@ const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
                 <>
                     <Stack direction={"column"} spacing={3}>
                         {sevenDaysTemperatureValues?.map((entry, index, arr) =>
-                            <>
-                                <Box key={index} sx={weekListItem}>
+                            <React.Fragment key={uuid()}>
+                                <Box sx={weekListItem}>
                                     <Box>
                                         <Typography sx={cardTitle}>
                                             {entry.day.toLocaleDateString([], {weekday: "long"})}
@@ -150,8 +151,8 @@ const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
                                         <Typography noWrap level="body-sm">{`${entry.max}${entry.unit}`}</Typography>
                                     </Box>
                                 </Box>
-                                {index !== arr.length - 1 ? <Divider/> : null}
-                            </>
+                                {index !== arr.length - 1 ? <Divider /> : null}
+                            </React.Fragment>
                         )}
                     </Stack>
                 </>
