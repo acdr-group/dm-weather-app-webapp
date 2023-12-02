@@ -6,7 +6,7 @@ describe("Analysis page spec", () => {
     const initialRequestUrl = "http://localhost:8080/readings?start=2022-08-31T22:00:00.000Z&end=2022-09-19T22:00:00.000Z&stations=106&sensors=1"
 
     beforeEach(() => {
-        cy.intercept("GET", initialRequestUrl).as("getReadings")
+        cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
         cy.visit("/analysis")
     })
 
