@@ -25,7 +25,6 @@ jobs:
     - name: Build project
       run: |
         npm install
-        npx webpack
         npm build
 
     - name: Run Tests (End To End Tests)
