@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from "react";
 import {Box} from "@mui/joy";
 import {SxProps} from "@mui/system";
 
@@ -17,9 +17,9 @@ const ResponsivSizingComponent: React.FC<Props> = (props: Props) => {
     const [containerSize, setContainerSize] = useState<ContainerSize | undefined>(props.initialSize)
 
     useEffect(() => {
-        window.addEventListener('resize', resizeChild)
+        window.addEventListener("resize", resizeChild)
         return () => {
-            window.removeEventListener('resize', resizeChild)
+            window.removeEventListener("resize", resizeChild)
         }
     }, [])
 

@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from 'react';
+import React, {PropsWithChildren} from "react";
 import {Box} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import Typography from "@mui/joy/Typography";

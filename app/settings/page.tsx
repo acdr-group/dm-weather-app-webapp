@@ -1,27 +1,27 @@
 "use client"
-import React, {PropsWithChildren, useEffect, useState} from 'react';
+import React, {PropsWithChildren, useEffect, useState} from "react";
 import PageLayoutComponent from "@/components/shared/PageLayoutComponent";
 import {Box, Button, Stack, Theme, useColorScheme} from "@mui/joy";
 import Typography from "@mui/joy/Typography";
-import List from '@mui/joy/List';
-import ListDivider from '@mui/joy/ListDivider';
-import ListItem from '@mui/joy/ListItem';
-import ListItemDecorator from '@mui/joy/ListItemDecorator';
-import PaletteOutlinedIcon from '@mui/icons-material/PaletteOutlined';
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import List from "@mui/joy/List";
+import ListDivider from "@mui/joy/ListDivider";
+import ListItem from "@mui/joy/ListItem";
+import ListItemDecorator from "@mui/joy/ListItemDecorator";
+import PaletteOutlinedIcon from "@mui/icons-material/PaletteOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import {useTheme} from "@mui/joy/styles";
-import Switch from '@mui/joy/Switch';
+import Switch from "@mui/joy/Switch";
 import {SxProps} from "@mui/system";
-import SouthAmericaIcon from '@mui/icons-material/SouthAmerica';
-import StorageIcon from '@mui/icons-material/Storage';
-import SatelliteAltOutlinedIcon from '@mui/icons-material/SatelliteAltOutlined';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import NewReleasesOutlinedIcon from '@mui/icons-material/NewReleasesOutlined';
-import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import SouthAmericaIcon from "@mui/icons-material/SouthAmerica";
+import StorageIcon from "@mui/icons-material/Storage";
+import SatelliteAltOutlinedIcon from "@mui/icons-material/SatelliteAltOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import NewReleasesOutlinedIcon from "@mui/icons-material/NewReleasesOutlined";
+import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 import {useCustomThemeContext} from "@/contexts/themeContext";
-import Input from '@mui/joy/Input';
+import Input from "@mui/joy/Input";
 import {customThemes} from "@/theme/customThemes";
 
 type Props = {}
@@ -192,14 +192,14 @@ const AppInfo: React.FC = () => {
 }
 
 const settingSectionContainer: SxProps = {
-    display: 'flex',
-    flexDirection: 'column',
-    flexWrap: 'wrap',
+    display: "flex",
+    flexDirection: "column",
+    flexWrap: "wrap",
     gap: 4,
 }
 const settingSectionItemListContainer: SxProps = {
     minWidth: 240,
-    borderRadius: 'md',
+    borderRadius: "md",
 }
 const listItem: SxProps = {
     px: {
@@ -214,9 +214,9 @@ const sectionHeader: SxProps = {
     mb: 2,
 }
 const switchStyle: SxProps = {
-    '--Switch-thumbSize': '27px',
-    '--Switch-trackWidth': '50px',
-    '--Switch-trackHeight': '25px',
+    "--Switch-thumbSize": "27px",
+    "--Switch-trackWidth": "50px",
+    "--Switch-trackHeight": "25px",
 }
 const colorIndicator: SxProps<Theme> = {
     display: {

@@ -1,3 +1,5 @@
+import {SensorMeasurement} from "../../models/sensorMeasurement";
+
 describe("Home page spec", () => {
 
   const initialRequestUrl = "http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T23:00:00.000Z&stations=106&sensors=%0A++++++++++++1,%0A++++++++++++4,%0A++++++++++++5,%0A++++++++++++3,%0A++++++++++++2,%0A++++++++++++6%0A++++++++"
@@ -16,10 +18,10 @@ describe("Home page spec", () => {
     cy.wait("@getReadings").then((interception) => {
 
       expect(interception.request.method).to.equal("GET")
-      expect(interception.response.statusCode).to.equal(200)
-      expect("sensorMeasurements" in interception.response.body).to.be.true;
+      expect(interception.response!.statusCode).to.equal(200)
+      expect("sensorMeasurements" in interception.response!.body).to.be.true;
 
-      interception.response.body.sensorMeasurements.forEach(sensorMeasurement => {
+      interception.response!.body.sensorMeasurements.forEach((sensorMeasurement: SensorMeasurement) => {
         expect(sensorMeasurement).to.have.property("id").and.be.a("number");
         expect(sensorMeasurement).to.have.property("avg").and.be.a("number");
         expect(sensorMeasurement).to.have.property("max").and.be.a("number");

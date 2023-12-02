@@ -1,6 +1,6 @@
 import React from "react";
-import {PointTooltipProps, ResponsiveLine, Serie} from '@nivo/line'
-import {useTheme} from '@mui/joy/styles';
+import {PointTooltipProps, ResponsiveLine, Serie} from "@nivo/line"
+import {useTheme} from "@mui/joy/styles";
 import ResponsivSizingComponent from "@/components/shared/ResponsivSizingComponent";
 import {Box, Stack, Theme, useColorScheme} from "@mui/joy"
 import {Theme as NivoTheme} from "@nivo/core";
@@ -58,11 +58,11 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                         data={graphData}
                         curve="natural"
                         margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
-                        xScale={{ type: 'point' }}
+                        xScale={{ type: "point" }}
                         yScale={{
-                            type: 'linear',
-                            min: 'auto',
-                            max: 'auto',
+                            type: "linear",
+                            min: "auto",
+                            max: "auto",
                             stacked: true,
                             reverse: false
                         }}
@@ -75,14 +75,14 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                             tickRotation: 0,
                             legend: props.horizontalAxisLabel,
                             legendOffset: 40,
-                            legendPosition: 'middle'
+                            legendPosition: "middle"
                         }}
                         axisLeft={{
                             tickSize: 10,
                             tickPadding: 5,
                             tickRotation: 0,
                             legendOffset: -45,
-                            legendPosition: 'middle',
+                            legendPosition: "middle",
                         }}
                         tooltip={
                             (tooltipProps) => <ChartToolTipComponent point={tooltipProps.point} unit={props.unit}/>
@@ -95,7 +95,7 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                         pointSize={1}
                         pointColor={theme.vars.palette.primary[500]}
                         pointBorderWidth={1}
-                        pointBorderColor={{from: 'serieColor'}}
+                        pointBorderColor={{from: "serieColor"}}
                         pointLabelYOffset={-12}
                         isInteractive={true}
                         useMesh={true}
@@ -117,7 +117,7 @@ const ChartToolTipComponent: React.FunctionComponent<PropsChartToolTipComponent>
     return (
         <Card orientation="vertical" sx={chartToolTipContainer}>
             <Stack alignItems="center">
-                <Typography level="body-sm">{point.data.x}</Typography>
+                <Typography level="body-sm">{`${point.data.x}`}</Typography>
                 <Typography level="body-lg" sx={toolTipMainText}>
                     {`${point.data.y}${props.unit}`}
                 </Typography>

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:ci": "start-server-and-test start http://localhost:3000 cypress run --headless"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -23,16 +24,19 @@
     "axios": "^1.6.1",
     "next": "14.0.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-color": "^3.0.10",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.7",
     "cypress": "^13.6.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
+    "start-server-and-test": "^2.0.3",
     "typescript": "^5"
   }
 }

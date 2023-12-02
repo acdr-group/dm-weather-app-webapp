@@ -1,6 +1,13 @@
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "indent": [4, "tab"]
+    "react-hooks/exhaustive-deps": "off",
+    "quotes": [
+      "error",
+      "double",
+      {
+        "avoidEscape": true
+      }
+    ]
   }
 }

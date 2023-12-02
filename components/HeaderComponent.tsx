@@ -1,11 +1,11 @@
 "use client"
-import React from 'react';
-import Box from '@mui/joy/Box';
-import Input from '@mui/joy/Input';
-import IconButton from '@mui/joy/IconButton';
-import Sheet from '@mui/joy/Sheet';
-import SearchIcon from '@mui/icons-material/Search';
-import FullscreenIcon from '@mui/icons-material/Fullscreen';
+import React from "react";
+import Box from "@mui/joy/Box";
+import Input from "@mui/joy/Input";
+import IconButton from "@mui/joy/IconButton";
+import Sheet from "@mui/joy/Sheet";
+import SearchIcon from "@mui/icons-material/Search";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import {SxProps} from "@mui/system";
 import CompanyLogoComponent from "@/components/shared/CompanyLogoComponent";
 import {Theme} from "@mui/joy";
@@ -52,8 +52,8 @@ const HeaderComponent: React.FC = () => {
 }
 
 const headerContainer: SxProps<Theme> = {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     justifyItems: "space-between",
     justifyContent: "space-between",
     flexGrow: 1,
@@ -63,16 +63,16 @@ const headerContainer: SxProps<Theme> = {
     top: 0,
     right: 0,
     left: 0,
-    minWidth: 'min-content',
+    minWidth: "min-content",
     background: theme =>
         `linear-gradient(to top, ${theme.vars.palette.primary[600]}, ${theme.vars.palette.primary[500]})`,
 }
 const searchInput: SxProps = {
-    '--Input-paddingInline': '12px',
+    "--Input-paddingInline": "12px",
     width: "30%",
     display: {
-        xs: 'none',
-        lg: 'flex',
+        xs: "none",
+        lg: "flex",
     },
 }
 const iconListContainer: SxProps = {

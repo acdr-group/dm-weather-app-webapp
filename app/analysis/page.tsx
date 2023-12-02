@@ -1,9 +1,9 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useState} from "react"
 import PageLayoutComponent from "@/components/shared/PageLayoutComponent"
 import {Box, FormControl, FormLabel, Input} from "@mui/joy"
-import Select from '@mui/joy/Select';
-import Option from '@mui/joy/Option';
+import Select from "@mui/joy/Select";
+import Option from "@mui/joy/Option";
 import {getMaxMinAndAvg} from "@/contexts/applicationContext";
 import {SxProps} from "@mui/system";
 import {SensorId, SensorName} from "@/models/sensor";
@@ -47,21 +47,21 @@ const AnalysisPage: React.FC<Props> = (props: Props) => {
 
         return [
             {
-                title: 'Höchster Wert',
+                title: "Höchster Wert",
                 description: "Lorem ipsum dolor sit amet kvkldn dfjbnfdbnd djhvdlifidwb",
                 value: max ?? 0,
                 icon: <div>TODO</div>,
                 unit: sensorMeasurement.unit,
             },
             {
-                title: 'Niedrigster Wert',
+                title: "Niedrigster Wert",
                 description: "Lorem ipsum dolor sit amet kvkldn dfjbnfdbnd djhvdlifidwb",
                 value: min ?? 0,
                 icon: <div>TODO</div>,
                 unit: sensorMeasurement.unit,
             },
             {
-                title: 'Durchschnittlicher Wert',
+                title: "Durchschnittlicher Wert",
                 description: "Lorem ipsum dolor sit amet kvkldn dfjbnfdbnd djhvdlifidwb",
                 value: avg ?? 0,
                 icon: <div>TODO</div>,
@@ -99,7 +99,7 @@ const AnalysisPage: React.FC<Props> = (props: Props) => {
                         onChange={(_, value) => handleSensorChange(value!)}
                         slotProps={{
                             listbox: {
-                                variant: 'outlined',
+                                variant: "outlined",
                             },
                         }}
                         data-cy="sensor-dropdown"
@@ -202,8 +202,8 @@ const filtersContainer: SxProps = {
     gap: 2,
 }
 const sensorDropdown: SxProps = {
-    '&:hover': {
-        bgcolor: 'transparent',
+    "&:hover": {
+        bgcolor: "transparent",
     },
 }
 export default AnalysisPage
