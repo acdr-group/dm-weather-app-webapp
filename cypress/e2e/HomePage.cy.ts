@@ -12,7 +12,22 @@ describe("Home page spec", () => {
   const urlDay6 = `http://localhost:8080/readings?start=2022-09-06T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
   const urlDay7 = `http://localhost:8080/readings?start=2022-09-07T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
 
-  beforeEach(() => {
+  // beforeEach(() => {
+  //   cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
+  //
+  //   // Interceptors for the Seven days forecast
+  //   cy.intercept("GET", urlDay1, { fixture: "reading-day-1.json" })
+  //   cy.intercept("GET", urlDay2, { fixture: "reading-day-2.json" })
+  //   cy.intercept("GET", urlDay3, { fixture: "reading-day-3.json" })
+  //   cy.intercept("GET", urlDay4, { fixture: "reading-day-4.json" })
+  //   cy.intercept("GET", urlDay5, { fixture: "reading-day-5.json" })
+  //   cy.intercept("GET", urlDay6, { fixture: "reading-day-6.json" })
+  //   cy.intercept("GET", urlDay7, { fixture: "reading-day-7.json" })
+  //
+  //   cy.visit("/")
+  // })
+
+  it("Should contain required content", () => {
     cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
 
     // Interceptors for the Seven days forecast
@@ -25,13 +40,25 @@ describe("Home page spec", () => {
     cy.intercept("GET", urlDay7, { fixture: "reading-day-7.json" })
 
     cy.visit("/")
-  })
 
-  it("Should contain required content", () => {
     cy.get("[data-cy='page-title']").contains("Vorhersage")
   })
 
   it("Should load required data for the page", () => {
+
+
+    cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
+
+    // Interceptors for the Seven days forecast
+    cy.intercept("GET", urlDay1, { fixture: "reading-day-1.json" })
+    cy.intercept("GET", urlDay2, { fixture: "reading-day-2.json" })
+    cy.intercept("GET", urlDay3, { fixture: "reading-day-3.json" })
+    cy.intercept("GET", urlDay4, { fixture: "reading-day-4.json" })
+    cy.intercept("GET", urlDay5, { fixture: "reading-day-5.json" })
+    cy.intercept("GET", urlDay6, { fixture: "reading-day-6.json" })
+    cy.intercept("GET", urlDay7, { fixture: "reading-day-7.json" })
+
+    cy.visit("/")
 
     cy.wait("@getReadings").then((interception) => {
 
@@ -85,6 +112,20 @@ describe("Home page spec", () => {
   // })
 
   it("Should contain temperatures of the day from 12 AM to 12 PM", () => {
+
+    cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
+
+    // Interceptors for the Seven days forecast
+    cy.intercept("GET", urlDay1, { fixture: "reading-day-1.json" })
+    cy.intercept("GET", urlDay2, { fixture: "reading-day-2.json" })
+    cy.intercept("GET", urlDay3, { fixture: "reading-day-3.json" })
+    cy.intercept("GET", urlDay4, { fixture: "reading-day-4.json" })
+    cy.intercept("GET", urlDay5, { fixture: "reading-day-5.json" })
+    cy.intercept("GET", urlDay6, { fixture: "reading-day-6.json" })
+    cy.intercept("GET", urlDay7, { fixture: "reading-day-7.json" })
+
+    cy.visit("/")
+    
     cy.get("[data-cy='twenty-four-hours-temperature-container']")
         .children().should("have.length", 24)
 
