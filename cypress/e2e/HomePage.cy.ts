@@ -2,10 +2,28 @@ import {SensorMeasurement} from "../../models/sensorMeasurement";
 
 describe("Home page spec", () => {
 
-  const initialRequestUrl = "http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T23:00:00.000Z&stations=106&sensors=%0A++++++++++++1,%0A++++++++++++4,%0A++++++++++++5,%0A++++++++++++3,%0A++++++++++++2,%0A++++++++++++6%0A++++++++"
+  const initialRequestUrl = `http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T23:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=%0A++++++++++++1,%0A++++++++++++4,%0A++++++++++++5,%0A++++++++++++3,%0A++++++++++++2,%0A++++++++++++6%0A++++++++`
+
+  const urlDay1 = `http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
+  const urlDay2 = `http://localhost:8080/readings?start=2022-09-02T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
+  const urlDay3 = `http://localhost:8080/readings?start=2022-09-03T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
+  const urlDay4 = `http://localhost:8080/readings?start=2022-09-04T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
+  const urlDay5 = `http://localhost:8080/readings?start=2022-09-05T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
+  const urlDay6 = `http://localhost:8080/readings?start=2022-09-06T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
+  const urlDay7 = `http://localhost:8080/readings?start=2022-09-07T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
 
   beforeEach(() => {
     cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
+
+    // Interceptors for the Seven days forecast
+    cy.intercept("GET", urlDay1, { fixture: "reading-day-1.json" })
+    cy.intercept("GET", urlDay2, { fixture: "reading-day-2.json" })
+    cy.intercept("GET", urlDay3, { fixture: "reading-day-3.json" })
+    cy.intercept("GET", urlDay4, { fixture: "reading-day-4.json" })
+    cy.intercept("GET", urlDay5, { fixture: "reading-day-5.json" })
+    cy.intercept("GET", urlDay6, { fixture: "reading-day-6.json" })
+    cy.intercept("GET", urlDay7, { fixture: "reading-day-7.json" })
+
     cy.visit("/")
   })
 
