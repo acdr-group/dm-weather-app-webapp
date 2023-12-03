@@ -37,6 +37,8 @@
     "cypress": "^13.6.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
+    "http-server": "^14.1.1",
+    "rollup": "^4.6.1",
     "start-server-and-test": "^2.0.3",
     "typescript": "^5"
   }

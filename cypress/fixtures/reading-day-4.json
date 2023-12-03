@@ -1,0 +1,26 @@
+{
+    "sensorMeasurements": [
+        {
+            "id": 1,
+            "avg": 17.1,
+            "max": 17.1,
+            "min": 17.1,
+            "name": "Luft_Temperatur",
+            "unit": "°C",
+            "values": [
+                17.1
+            ],
+            "description": "",
+            "max_abs": 17.1,
+            "min_abs": 17.1,
+            "the_sums": null,
+            "public_name": "",
+            "running_sum": [
+                "17.1"
+            ]
+        }
+    ],
+    "time": [
+        "2022-09-04T00:00:00"
+    ]
+}
