@@ -22,20 +22,25 @@ jobs:
       run: |
         npm run build
 
-#    - name: Run Tests (End To End Tests)
-#      run: |
-#        npm run cypress:ci
+    - name: Run App in Background
+      run: |
+        npm run start &
+
+    - name: Run Tests (End To End Tests)
+      run: |
+        cypress run --headless
+
     - name: Printing Env Variables
       run: |
         cat ./.env
 
-    - name: Cypress run
-      uses: cypress-io/github-action@v4
-      with:
-        browser: chrome
-        build: npm run build
-        start: npm start
-        wait-on: "http://localhost:3000"
+#    - name: Cypress run
+#      uses: cypress-io/github-action@v4
+#      with:
+#        browser: chrome
+#        build: npm run build
+#        start: npm dev
+#        wait-on: "http://localhost:3000"
       env:
         NEXT_PUBLIC_BACKEND_SERVER_HOST: ${{ secrets.NEXT_PUBLIC_BACKEND_SERVER_HOST }}
         NEXT_PUBLIC_BACKEND_SERVER_URL: ${{ secrets.NEXT_PUBLIC_BACKEND_SERVER_URL }}
