@@ -4,12 +4,16 @@ describe("Analysis page spec", () => {
 
     const initialRequestUrl = "http://localhost:8080/readings?start=2022-08-31T22:00:00.000Z&end=2022-09-19T22:00:00.000Z&stations=106&sensors=1"
 
-    beforeEach(() => {
-        cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
-        cy.visit("/analysis")
-    })
+    // beforeEach(() => {
+    //     cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
+    //     cy.visit("/analysis")
+    // })
 
     it("Should contain required content", () => {
+
+        cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
+        cy.visit("/analysis")
+
         cy.get("[data-cy='page-title']").contains("Analysen")
         cy.contains("Sensor")
         cy.contains("Ab")
@@ -17,6 +21,10 @@ describe("Analysis page spec", () => {
     })
 
     it("Should load required data for the current page", () => {
+
+        cy.intercept("GET", initialRequestUrl, { fixture: "sensor-measurements.json" }).as("getReadings")
+        cy.visit("/analysis")
+
 
         cy.wait("@getReadings").then((interception) => {
 
