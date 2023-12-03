@@ -1,4 +1,3 @@
-import {SensorName} from "../../models/sensor";
 import {SensorMeasurement} from "../../models/sensorMeasurement";
 
 describe("Analysis page spec", () => {
