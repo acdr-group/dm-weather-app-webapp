@@ -2,7 +2,7 @@ import {SensorMeasurement} from "../../models/sensorMeasurement";
 
 describe("Home page spec", () => {
 
-  const initialRequestUrl = `http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T23:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=%0A++++++++++++1,%0A++++++++++++4,%0A++++++++++++5,%0A++++++++++++3,%0A++++++++++++2,%0A++++++++++++6%0A++++++++`
+  const initialRequestUrl = "http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T23:00:00.000Z&stations=106&sensors=%0A++++++++++++1,%0A++++++++++++4,%0A++++++++++++5,%0A++++++++++++3,%0A++++++++++++2,%0A++++++++++++6%0A++++++++"
 
   const urlDay1 = `http://localhost:8080/readings?start=2022-09-01T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
   const urlDay2 = `http://localhost:8080/readings?start=2022-09-02T00:00:00.000Z&end=2022-09-01T00:00:00.000Z&stations=${process.env.NEXT_PUBLIC_DM_TECH_STATION_ID}&sensors=1`
