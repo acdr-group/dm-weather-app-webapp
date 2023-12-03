@@ -32,11 +32,10 @@ jobs:
     - name: Cypress run
       uses: cypress-io/github-action@v4
       with:
+        browser: chrome
+        build: npm run build
         start: npm start
-        wait-on: 'http://localhost:3000/'
-        config: baseUrl=http://localhost:3000/
-        install: false
-        parallel: false
+        wait-on: "http://localhost:3000"
 
         
         
