@@ -28,7 +28,7 @@ jobs:
 
     - name: Run Tests (End To End Tests)
       run: |
-        cypress run --headless
+        npm run cypress:headless
 
     - name: Printing Env Variables
       run: |
