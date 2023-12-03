@@ -24,10 +24,11 @@ jobs:
 
     - name: Run App in Background
       run: |
-        npm run start &
+        npm run start -- -H 127.0.0.1 -p 3000  &
 
     - name: Show Cypress information
       run: npx cypress info
+
     - name: Verify Cypress can run
       run: npx cypress verify
 
