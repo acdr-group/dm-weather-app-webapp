@@ -12,7 +12,7 @@ jobs:
 
     - name: Installing dependencies
       run: |
-        npm install
+        npm ci --legacy-peer-deps
 
     - name: EsLint - Check linting
       run: |
@@ -25,6 +25,11 @@ jobs:
     - name: Run App in Background
       run: |
         npm run start &
+
+    - name: Show Cypress information
+      run: npx cypress info
+    - name: Verify Cypress can run
+      run: npx cypress verify
 
     - name: Run Tests (End To End Tests)
       run: |
