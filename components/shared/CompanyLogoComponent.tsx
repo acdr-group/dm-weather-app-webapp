@@ -11,7 +11,7 @@ const CompanyLogoComponent: React.FC<Props> = (props: Props) => {
             <Image
                 src={"/logo.png"}
                 alt={"company-logo"}
-                width={30}
+                width={40}
                 height={30}
             />
             <Typography level="title-md" sx={logoText}>
