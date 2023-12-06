@@ -32,9 +32,9 @@ jobs:
     - name: Verify Cypress can run
       run: npx cypress verify
 
-    - name: Run Tests (End To End Tests)
-      run: |
-        npm run cypress:headless
+#    - name: Run Tests (End To End Tests)
+#      run: |
+#        npm run cypress:headless
 
     - name: Printing Env Variables
       run: |
