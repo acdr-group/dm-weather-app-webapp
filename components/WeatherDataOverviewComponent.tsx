@@ -1,4 +1,4 @@
-import React, {forwardRef, useEffect} from "react";
+import React, {forwardRef, useEffect} from 'react';
 import {Box} from "@mui/joy";
 import {SensorId} from "@/models/sensor";
 import {useApplicationContext} from "@/contexts/applicationContext";
@@ -21,8 +21,7 @@ type Props = {
     selectedDate: Date
 }
 
-// eslint-disable-next-line react/display-name
-const WeatherDataOverviewComponent = forwardRef((props: Props, ref) => {
+const   WeatherDataOverviewComponent = forwardRef((props: Props, ref) => {
 
     const { selectedDate } = props
 
@@ -160,6 +159,7 @@ const WeatherDataOverviewComponent = forwardRef((props: Props, ref) => {
             <Box sx={overviewWrapper}>
                 <Box sx={overviewCardAndFilterContainer}>
                     <OverviewCardComponent
+                        weatherValue={getKeyValues(getWeatherKeyValue)}
                         measurementDate={props.selectedDate.toLocaleDateString()}
                         overviewValues={getOverviewValues(getWeatherKeyValue)}
                         averageDayTemperatureAndUnit={`${getWeatherKeyValue(SensorId.AIR_TEMPERATURE).avg}${getWeatherKeyValue(SensorId.AIR_TEMPERATURE).unit}`}
@@ -169,7 +169,7 @@ const WeatherDataOverviewComponent = forwardRef((props: Props, ref) => {
                         hours={data.time}
                         values={getWeatherKeyValue(SensorId.AIR_TEMPERATURE).values}
                     />
-                    <KeyValueCardListComponent keyValues={getKeyValues(getWeatherKeyValue)}/>
+                    {/*<KeyValueCardListComponent keyValues={getKeyValues(getWeatherKeyValue)}/>*/}
                 </Box>
                 <WeeklyTemperaturesCardComponent/>
             </Box>

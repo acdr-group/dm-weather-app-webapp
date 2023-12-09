@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {Box} from "@mui/joy";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import Card from "@mui/joy/Card";
@@ -8,6 +8,7 @@ import {SxProps} from "@mui/system";
 import {ListEntry, TemperaturesForPeriodsOfTheDay} from "@/app/page";
 
 type Props = {
+    weatherValue : ListEntry[],
     measurementDate: string
     overviewValues: ListEntry[]
     averageDayTemperatureAndUnit: string
@@ -37,7 +38,15 @@ const OverviewCardComponent: React.FC<Props> = (props: Props) => {
                     {props.overviewValues.map(entry =>
                         <Box key={entry.value} sx={overviewValueItem}>
                             <Box>{entry.icon}</Box>
-                            <Box>{`${entry.value}${entry.unit}`}</Box>
+                            <Box sx={cardTitle2}>{`${entry.value}${entry.unit}`}</Box>
+                        </Box>
+                    )}
+                </Box>
+                <Box sx={overviewValuesContainer}>
+                    {props.weatherValue.map(entry =>
+                        <Box key={entry.value} sx={overviewValueItem}>
+                            <Box>{entry.icon}</Box>
+                            <Box sx={cardTitle2}>{`${entry.value}${entry.unit}`}</Box>
                         </Box>
                     )}
                 </Box>
@@ -69,6 +78,12 @@ const OverviewCardComponent: React.FC<Props> = (props: Props) => {
     )
 }
 
+const cardContainer: SxProps = {
+    display: "grid",
+    alignItems: "start",
+    alignContent: "start",
+    gap: 4,
+}
 const overviewCardContainer: SxProps = {
     display: "grid",
     gridTemplateColumns: {
@@ -76,11 +91,11 @@ const overviewCardContainer: SxProps = {
         xs: "1fr",
     },
     gap: 5,
-    borderRadius: "sm",
+    borderRadius: 'sm',
 }
 const overviewCardDataColumn: SxProps = {
     display: "grid",
-    gridTemplateRows: "auto 1fr auto",
+    gridTemplateRows: "auto 1fr",
     gap: 8,
     py: 0.8,
 }
@@ -96,8 +111,11 @@ const iconAndCityContainer: SxProps = {
     gap: 0.8,
 }
 const measurementDate: SxProps = {}
+const cardTitle2: SxProps = {
+    fontSize: 18,
+}
 const cardTitle: SxProps = {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "600",
 }
 const temperatureProgressListContainer: SxProps = {
@@ -123,11 +141,11 @@ const overviewValuesContainer: SxProps = {
     gap: 3,
 }
 const linearProgress: SxProps = {
-    "--LinearProgress-radius": "10px",
-    "--LinearProgress-thickness": "15px",
+    '--LinearProgress-radius': '10px',
+    '--LinearProgress-thickness': '15px',
 }
 const linearProgressContent: SxProps = {
-    mixBlendMode: "difference",
+    mixBlendMode: 'difference',
 }
 
 export default OverviewCardComponent

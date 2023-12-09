@@ -1,23 +1,23 @@
-import React, {useState} from "react";
-import Box from "@mui/joy/Box";
-import Drawer from "@mui/joy/Drawer";
-import Card from "@mui/joy/Card";
-import CardContent from "@mui/joy/CardContent";
-import DialogTitle from "@mui/joy/DialogTitle";
-import DialogContent from "@mui/joy/DialogContent";
-import ModalClose from "@mui/joy/ModalClose";
-import Divider from "@mui/joy/Divider";
-import FormControl from "@mui/joy/FormControl";
-import Stack from "@mui/joy/Stack";
-import Sheet from "@mui/joy/Sheet";
-import Typography from "@mui/joy/Typography";
+import React, {useState} from 'react';
+import Box from '@mui/joy/Box';
+import Drawer from '@mui/joy/Drawer';
+import Card from '@mui/joy/Card';
+import CardContent from '@mui/joy/CardContent';
+import DialogTitle from '@mui/joy/DialogTitle';
+import DialogContent from '@mui/joy/DialogContent';
+import ModalClose from '@mui/joy/ModalClose';
+import Divider from '@mui/joy/Divider';
+import FormControl from '@mui/joy/FormControl';
+import Stack from '@mui/joy/Stack';
+import Sheet from '@mui/joy/Sheet';
+import Typography from '@mui/joy/Typography';
 import IconButton from "@mui/joy/IconButton";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import Badge from "@mui/joy/Badge";
 import {AppNotification} from "@/models/notification";
 import {SxProps} from "@mui/system";
-import InfoIcon from "@mui/icons-material/Info";
-import WarningIcon from "@mui/icons-material/Warning";
+import InfoIcon from '@mui/icons-material/Info';
+import WarningIcon from '@mui/icons-material/Warning';
 
 type PropsNotificationDrawer = {
     notifications: AppNotification[]
@@ -26,7 +26,7 @@ const NotificationDrawerComponent: React.FC<PropsNotificationDrawer> = (props: P
 
     const [open, setOpen] = useState<boolean>(false)
 
-    const getNotificationIcon = (notificationType: AppNotification["type"]): JSX.Element => {
+    const getNotificationIcon = (notificationType: AppNotification["type"]) => {
         switch (notificationType) {
             case "info": return <InfoIcon color="info" />
             case "warning": return <WarningIcon color="warning" />
@@ -61,13 +61,7 @@ const NotificationDrawerComponent: React.FC<PropsNotificationDrawer> = (props: P
                     <DialogContent sx={dialogContent}>
                         <FormControl>
                             <Box sx={notificationListContainer}>
-                                {props.notifications.map((item) =>
-                                    <NotificationCardComponent
-                                        key={item.id}
-                                        icon={getNotificationIcon(item.type)}
-                                        {...item}
-                                    />
-                                )}
+                                {props.notifications.map((item) => <NotificationCardComponent key={item.id} {...item}/>)}
                             </Box>
                         </FormControl>
                     </DialogContent>
@@ -77,9 +71,7 @@ const NotificationDrawerComponent: React.FC<PropsNotificationDrawer> = (props: P
     )
 }
 
-type PropsNotificationCard = AppNotification & {
-    icon: JSX.Element
-}
+type PropsNotificationCard = AppNotification & {}
 const NotificationCardComponent: React.FC<PropsNotificationCard> = (props: PropsNotificationCard) => {
     return (
         <Card sx={notificationCardItem}>
@@ -105,35 +97,35 @@ const iconButton: SxProps = {
     borderRadius: "20%",
 }
 const drawerSlot: SxProps = {
-    bgcolor: "transparent",
+    bgcolor: 'transparent',
     p: {
         md: 3,
         sm: 0
     },
-    boxShadow: "none",
+    boxShadow: 'none',
 }
 const drawerContent: SxProps = {
-    borderRadius: "md",
+    borderRadius: 'md',
     p: 2,
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
     gap: 2,
-    height: "100%",
-    overflow: "auto",
+    height: '100%',
+    overflow: 'auto',
 }
 const divider: SxProps = {
-    mt: "auto"
+    mt: 'auto'
 }
 const dialogContent: SxProps = {
     gap: 2
 }
 const notificationListContainer: SxProps = {
-    display: "grid",
+    display: 'grid',
     gap: 1.5,
 }
 const notificationCardItem: SxProps = {
-    boxShadow: "none",
-    "&:hover": { bgcolor: "background.level1" },
+    boxShadow: 'none',
+    '&:hover': { bgcolor: 'background.level1' },
 }
 const notificationTitle: SxProps = {
     fontWeight: "600",

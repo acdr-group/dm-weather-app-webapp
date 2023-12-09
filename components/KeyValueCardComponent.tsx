@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {KeyValue} from "@/app/page";
 import {Box} from "@mui/joy";
 import Typography from "@mui/joy/Typography";
@@ -32,7 +32,7 @@ const KeyValueCardComponent: React.FC<Props> = (props: Props) => {
 }
 
 const cardItemContainer: SxProps = {
-    display: "flex",
+    display: 'flex',
     alignItems: "center",
     alignContent: "center",
     justifyContent: "space-between",

@@ -1,7 +1,7 @@
 "use client"
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import Card from "@mui/joy/Card";
-import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
+import CloudOutlinedIcon from '@mui/icons-material/CloudOutlined';
 import {Box, Stack} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import Typography from "@mui/joy/Typography";
@@ -19,14 +19,39 @@ type Props = {
 }
 const TwentyFourHoursTemperatureComponent: React.FC<Props> = (props: Props) => {
 
-    const ref = useRef<HTMLDivElement | null>(null)
+    const ref = useRef(null)
+    const scrollRef = useRef(null)
+    const [scrollInterval, setScrollInterval] = useState(null)
     const [containerWidth, setWidth] = useState(100 + "%");
     const [animationState, setPlay] = useState("paused");
+    let selectedIndex = 0;
+
+
     useEffect(() => {
-        if (ref.current) {
-            setWidth(ref.current.scrollWidth + "px");
-            setPlay("running");
-        }
+
+        const interval = setInterval(() => {
+
+            console.log(selectedIndex)
+
+            const length = hourlyTemperatures.length;
+
+
+            // @ts-ignore
+            const elements = document.getElementById('hours-scrolling-element').children;
+
+
+            if (selectedIndex >= length) {
+                selectedIndex = 0;
+                elements[length - 1].scrollIntoView({behavior: 'smooth'});
+            } else {
+                elements[selectedIndex].scrollIntoView({behavior: 'smooth'});
+                selectedIndex += 8;
+            }
+
+        }, 2000);
+
+        return () => clearInterval(interval);
+
     }, [])
 
     const hourlyTemperatures: HourlyTemperature[] = useMemo<HourlyTemperature[]>(() => {
@@ -41,8 +66,10 @@ const TwentyFourHoursTemperatureComponent: React.FC<Props> = (props: Props) => {
     }, [props.hours, props.values])
 
     return (
-        <Card orientation="horizontal" ref={ref} sx={cardContainer}data-cy="twenty-four-hours-temperature-wrapper">
-            <Stack direction="row" sx={cardContent} data-cy="twenty-four-hours-temperature-container">
+        <Card orientation="horizontal" ref={ref} sx={cardContainer} data-cy="twenty-four-hours-temperature-wrapper">
+            <Stack id="hours-scrolling-element" ref={scrollRef} direction="row"
+                   sx={cardContent}
+                   data-cy="twenty-four-hours-temperature-container">
                 {hourlyTemperatures.map((entry, index) =>
                     <Box key={index} sx={dayContainer}>
                         <Typography noWrap>
@@ -62,8 +89,8 @@ const cardContainer: SxProps = {
     overflowX: "auto",
 }
 const cardContent: SxProps = {
-    //overflowX: "auto",
-    //overflow: "hidden",
+    overflowX: "auto",
+    overflow: "hidden",
     display: "flex",
     "@keyframes swipe": {
         "0%": {
@@ -75,7 +102,8 @@ const cardContent: SxProps = {
             opacity: 1,
         },
     },
-    //animation: "swipe 10s linear infinite backwards",
+
+//animation: "swipe 10s linear infinite backwards",
 }
 const dayContainer: SxProps = {
     display: "grid",
