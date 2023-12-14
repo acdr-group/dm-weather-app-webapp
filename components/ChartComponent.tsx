@@ -1,33 +1,34 @@
 import React from "react";
-import {PointTooltipProps, ResponsiveLine, Serie} from "@nivo/line"
-import {useTheme} from "@mui/joy/styles";
-import ResponsivSizingComponent from "@/components/shared/ResponsivSizingComponent";
-import {Box, Stack, Theme, useColorScheme} from "@mui/joy"
-import {Theme as NivoTheme} from "@nivo/core";
+import { PointTooltipProps, ResponsiveLine, Serie } from "@nivo/line";
+import { useTheme } from "@mui/joy/styles";
+import ResponsiveSizingComponent from "@/components/shared/ResponsivSizingComponent";
+import { Box, Stack, Theme, useColorScheme } from "@mui/joy";
+import { Theme as NivoTheme } from "@nivo/core";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
-import {SxProps} from "@mui/system";
+import { SxProps } from "@mui/system";
 
 export type ChartDataSeType = {
     x: string,
     y: number,
-}
-type PropsChart = {
-    chartTitle: string
-    dataSet: ChartDataSeType[]
-    verticalAxisLabel: string
-    horizontalAxisLabel: string
-    unit: string
-}
-const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
+};
 
-    const theme = useTheme()
-    const { mode } = useColorScheme()
+type PropsChart = {
+    chartTitle: string,
+    dataSet: ChartDataSeType[],
+    verticalAxisLabel: string,
+    horizontalAxisLabel: string,
+    unit: string,
+};
+
+const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
+    const theme = useTheme();
+    const { mode } = useColorScheme();
 
     const graphData: Serie[] = [{
         id: props.chartTitle,
-        data: props.dataSet
-    }]
+        data: props.dataSet,
+    }];
 
     const chartTheme: NivoTheme = {
         axis: {
@@ -35,78 +36,76 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                 text: {
                     fill: mode === "light" ? theme.vars.palette.neutral["700"] : theme.vars.palette.neutral["400"],
                     fontFamily: "Inter",
-                    outlineColor: "transparent"
-                }
+                    outlineColor: "transparent",
+                },
             },
             legend: {
                 text: {
-                    fill: mode === "light" ? theme.vars.palette.neutral["700"]  : theme.vars.palette.neutral["400"],
+                    fill: mode === "light" ? theme.vars.palette.neutral["700"] : theme.vars.palette.neutral["400"],
                     fontFamily: "Inter",
                     fontWeight: "500",
                     fontSize: "15px",
-                    outlineColor: "transparent"
+                    outlineColor: "transparent",
                 },
-            }
-        }
-    }
+            },
+        },
+        grid: {
+            line: {
+                stroke: mode === "light" ? "#eee" : "#555",
+                strokeWidth: 1,
+            },
+        },
+    };
+
+    const lineColor = theme.vars.palette.primary[500];
+    const areaColor = mode === "dark" ? lineColor : "#ccc";
 
     return (
-        <ResponsivSizingComponent>
+        <ResponsiveSizingComponent>
             {(containerSize) =>
                 <Box sx={{ width: containerSize.width, height: containerSize.height }}>
                     <ResponsiveLine
                         data={graphData}
-                        curve="natural"
-                        margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
+                        margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
                         xScale={{ type: "point" }}
-                        yScale={{
-                            type: "linear",
-                            min: "auto",
-                            max: "auto",
-                            stacked: true,
-                            reverse: false
-                        }}
-                        yFormat=" >-.2f"
+                        yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
                         axisTop={null}
                         axisRight={null}
                         axisBottom={{
-                            tickSize: 10,
+                            tickSize: 5,
                             tickPadding: 5,
                             tickRotation: 0,
                             legend: props.horizontalAxisLabel,
-                            legendOffset: 40,
-                            legendPosition: "middle"
-                        }}
-                        axisLeft={{
-                            tickSize: 10,
-                            tickPadding: 5,
-                            tickRotation: 0,
-                            legendOffset: -45,
+                            legendOffset: 36,
                             legendPosition: "middle",
                         }}
-                        tooltip={
-                            (tooltipProps) => <ChartToolTipComponent point={tooltipProps.point} unit={props.unit}/>
-                        }
-                        enablePoints={true}
-                        enableCrosshair={true}
+                        axisLeft={{
+                            tickSize: 5,
+                            tickPadding: 5,
+                            tickRotation: 0,
+                            legend: props.verticalAxisLabel,
+                            legendOffset: -40,
+                            legendPosition: "middle",
+                        }}
+                        colors={lineColor}
                         theme={chartTheme}
                         enableArea={true}
-                        colors={theme.vars.palette.primary[500]}
-                        pointSize={1}
-                        pointColor={theme.vars.palette.primary[500]}
-                        pointBorderWidth={1}
-                        pointBorderColor={{from: "serieColor"}}
+                        areaBaselineValue={0}
+                        areaOpacity={mode === "dark" ? 0.75 : 0.1}
+                        pointSize={10}
+                        pointColor={{ theme: 'background' }}
+                        pointBorderWidth={2}
+                        pointBorderColor={{ from: 'serieColor' }}
+                        pointLabel="y"
                         pointLabelYOffset={-12}
-                        isInteractive={true}
                         useMesh={true}
-                        legends={undefined}
-                        animate={true}
+                        legends={[]}
                     />
                 </Box>
             }
-        </ResponsivSizingComponent>
-    )
-}
+        </ResponsiveSizingComponent>
+    );
+};
 
 type PropsChartToolTipComponent = PointTooltipProps & {
     unit: string

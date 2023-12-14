@@ -23,7 +23,7 @@
     "@nivo/line": "^0.83.0",
     "@syncfusion/ej2-react-grids": "^23.1.44",
     "axios": "^1.6.1",
-    "next": "14.0.1",
+    "next": "^14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "uuid": "^9.0.1"

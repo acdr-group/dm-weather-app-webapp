@@ -77,7 +77,6 @@ const NotificationCardComponent: React.FC<PropsNotificationCard> = (props: Props
         <Card sx={notificationCardItem}>
             <CardContent>
                 <Stack direction={"row"} spacing={2}>
-                    <Box>{props.icon}</Box>
                     <Stack spacing={1}>
                         <Stack direction="row" spacing={2}>
                             <Typography level="title-sm" sx={notificationTitle}>{props.title}</Typography>
