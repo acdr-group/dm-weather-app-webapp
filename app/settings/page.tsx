@@ -79,12 +79,12 @@ const DataSourceSettings: React.FC = () => {
         {
             icon: <StorageIcon/>,
             label: "Datenherkunft",
-            value: <ValueContent>Heidelberg Universität</ValueContent>,
+            value: <ValueContent>{process.env.NEXT_PUBLIC_WEATHER_DATA_PROVIDER}</ValueContent>,
         },
         {
             icon: <SatelliteAltOutlinedIcon/>,
             label: "Wetterstation",
-            value: <ValueContent>Karlsruhe dmTECH</ValueContent>,
+            value: <ValueContent>{process.env.NEXT_PUBLIC_WEATHER_DATA_PROVIDER}</ValueContent>,
         },
     ]
 
@@ -149,10 +149,8 @@ const ThemeSettings: React.FC = () => {
             label: "Sprache",
             value: (
                 <ValueContent>
-                    {/*TODO: Implement switching language!*/}
-                    <Select defaultValue="Deutsch" onChange={() => alert("This feature is in development!")}>
+                    <Select defaultValue="Deutsch">
                         <Option value="Deutsch">Deutsch</Option>
-                        <Option value="Englisch">Englisch</Option>
                     </Select>
                 </ValueContent>
             )
@@ -174,12 +172,12 @@ const AppInfo: React.FC = () => {
         {
             icon: <InfoOutlinedIcon/>,
             label: "App-Version",
-            value: <ValueContent>1.0.0</ValueContent>,
+            value: <ValueContent>{process.env.NEXT_PUBLIC_APP_VERSION}</ValueContent>,
         },
         {
             icon: <NewReleasesOutlinedIcon/>,
             label: "Letzter Release",
-            value: <ValueContent>01.01.2024</ValueContent>,
+            value: <ValueContent>{process.env.NEXT_PUBLIC_LAST_RELEASE_DATE}</ValueContent>,
         },
     ]
 

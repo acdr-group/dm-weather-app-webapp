@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react"
-import {AxiosResponse} from "axios";
 
 interface UseFetchOutput <T> {
     data: T
@@ -7,10 +6,10 @@ interface UseFetchOutput <T> {
     error: unknown
     reFetch: () => void
 }
-const useFetch = <T>(request: Promise<AxiosResponse<T, any>>): UseFetchOutput<T> => {
+const useFetch = <T>(request: Promise<T>): UseFetchOutput<T> => {
 
     const [data, setData] = useState<T | undefined>(undefined)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const [error, setError] = useState<unknown>(null)
 
     useEffect(() => {
@@ -23,7 +22,7 @@ const useFetch = <T>(request: Promise<AxiosResponse<T, any>>): UseFetchOutput<T>
 
         try {
             const response = await request
-            setData(response.data)
+            setData(response)
             setIsLoading(false)
         } catch (error) {
             setError(error)

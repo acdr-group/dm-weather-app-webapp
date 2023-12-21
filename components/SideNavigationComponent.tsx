@@ -12,6 +12,7 @@ import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import {SxProps} from "@mui/system";
 import {usePathname, useRouter} from "next/navigation";
+import Typography from "@mui/joy/Typography";
 
 type SideNavigationButton = {
     label: string
@@ -27,7 +28,7 @@ const SideNavigationComponent = () => {
 
     const sideNavigationButtons: SideNavigationButton[] = [
         {
-            label: "Start",
+            label: "Vorhersage",
             icon: <HomeOutlinedIcon />,
             isActive: pathname === "/",
             onClick: () => router.push("/"),
@@ -62,10 +63,17 @@ const SideNavigationComponent = () => {
                             sx={{
                                 py: 1.5,
                                 color: theme => button.isActive ? `${theme.vars.palette.primary[500]}` : "inherit",
+                                fontWeight: button.isActive ? "bold" : "unset",
                             }}
                         >
-                            <ListItemDecorator>{button.icon}</ListItemDecorator>
-                            {button.label}
+                            <ListItemDecorator sx={{ color: "inherit", fontWeight: "inherit" }}>{button.icon}</ListItemDecorator>
+                            <Typography
+                                sx={{
+                                    color: "inherit",
+                                    fontWeight: "inherit",
+                            }}>
+                                {button.label}
+                            </Typography>
                             {button.chip ?? null}
                         </ListItemButton>
                     )}

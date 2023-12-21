@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {PointTooltipProps, ResponsiveLine, Serie} from "@nivo/line"
 import {useTheme} from "@mui/joy/styles";
@@ -8,13 +9,13 @@ import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 import {SxProps} from "@mui/system";
 
-export type ChartDataSeType = {
+export type ChartDataSetType = {
     x: string,
     y: number,
 }
 type PropsChart = {
     chartTitle: string
-    dataSet: ChartDataSeType[]
+    dataSet: ChartDataSetType[]
     verticalAxisLabel: string
     horizontalAxisLabel: string
     unit: string
@@ -53,7 +54,7 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
     return (
         <ResponsivSizingComponent>
             {(containerSize) =>
-                <Box sx={{ width: containerSize.width, height: containerSize.height }}>
+                <Box sx={{ position: "absolute", width: containerSize.width, height: containerSize.height }}>
                     <ResponsiveLine
                         data={graphData}
                         curve="natural"
@@ -92,7 +93,7 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                         theme={chartTheme}
                         enableArea={true}
                         colors={theme.vars.palette.primary[500]}
-                        pointSize={1}
+                        pointSize={10}
                         pointColor={theme.vars.palette.primary[500]}
                         pointBorderWidth={1}
                         pointBorderColor={{from: "serieColor"}}
