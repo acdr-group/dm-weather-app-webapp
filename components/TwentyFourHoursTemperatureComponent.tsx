@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Card from "@mui/joy/Card";
 import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import { Box, Stack } from "@mui/joy";
@@ -26,7 +26,7 @@ const TwentyFourHoursTemperatureComponent: React.FC<Props> = (props: Props) => {
         overflowX: "hidden",
         display: "flex",
         whiteSpace: "nowrap",
-        animation: `scroll 60s linear infinite ${isPaused ? 'paused' : 'running'}`,
+        animation: `scroll 60s linear infinite ${isPaused ? "paused" : "running"}`,
     };
 
     const hourlyTemperatures: HourlyTemperature[] = useMemo<HourlyTemperature[]>(() => {
