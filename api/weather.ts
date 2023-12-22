@@ -5,9 +5,7 @@ import axios, {
 
 export type Weather = {
     cityName: string;
-    clouds: {
-        all: number;
-    };
+    clouds: number;
     dateTime: Date;
     dateTimeText: string;
     description: string;
@@ -25,11 +23,9 @@ export type Weather = {
     tempMin: number;
     timezone: number;
     visibility: number;
-    wind: {
-        deg: number;
-        gust: number;
-        speed: number;
-    };
+    windSpeed: number;
+    windDirection: number;
+    windGust: number;
 }
 
 export const getWeatherApi = async (requestConfig: AxiosRequestConfig): Promise<AxiosResponse<Weather>> => {

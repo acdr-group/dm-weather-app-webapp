@@ -50,7 +50,7 @@ const WeatherDataOverviewComponent: React.FC = () => {
             },
             {
                 icon: <AirOutlinedIcon/>,
-                value: weather.wind.speed,
+                value: weather.windSpeed,
                 unit: "m/s",
             },
             {
