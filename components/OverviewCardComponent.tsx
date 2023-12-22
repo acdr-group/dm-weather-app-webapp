@@ -1,5 +1,5 @@
 import React from "react";
-import {Box} from "@mui/joy";
+import {Box, Theme} from "@mui/joy";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
@@ -8,16 +8,15 @@ import {SxProps} from "@mui/system";
 import {ListEntry, TemperaturesForPeriodsOfTheDay} from "@/app/page";
 
 type Props = {
-    measurementDate: string
-    overviewValues: ListEntry[]
-    averageDayTemperatureAndUnit: string
+    description: string
+    measurementDate: Date
+    overviewWeatherValues: ListEntry[]
+    currentTemperatureAndUnit: string
     temperaturesForPeriodsOfTheDay: TemperaturesForPeriodsOfTheDay[]
 }
 const OverviewCardComponent: React.FC<Props> = (props: Props) => {
     return (
         <Card
-            //invertedColors
-            //variant="soft"
             orientation="horizontal"
             sx={overviewCardContainer}
         >
@@ -27,54 +26,32 @@ const OverviewCardComponent: React.FC<Props> = (props: Props) => {
                         <LocationOnOutlinedIcon/>
                         <Box sx={cardTitle}>Karlsruhe dmTECH</Box>
                     </Box>
-                    <Box sx={measurementDate}>{new Date(props.measurementDate).toLocaleDateString([], {day: "2-digit", month: "short", year: "2-digit"})}</Box>
+                    <Box sx={measurementDate}>
+                        {props.measurementDate
+                            .toLocaleDateString("de-DE", {day: "2-digit", month: "short", year: "numeric"})
+                        }
+                    </Box>
                 </Box>
                 <Box sx={overviewTemperatureValueContainer}>
-                    <Box sx={temperatureValue}>{props.averageDayTemperatureAndUnit}</Box>
-                    <Box></Box>
+                    <Typography sx={temperatureValue}>{props.currentTemperatureAndUnit}</Typography>
+                    <Typography level="title-lg" sx={{ fontSize: 25 }}>{props.description}</Typography>
                 </Box>
                 <Box sx={overviewValuesContainer}>
-                    {props.overviewValues.map(entry =>
-                        <Box key={entry.value} sx={overviewValueItem}>
+                    {props.overviewWeatherValues.map((entry, index) =>
+                        <Box key={index} sx={overviewValueItem}>
                             <Box>{entry.icon}</Box>
                             <Box>{`${entry.value}${entry.unit}`}</Box>
                         </Box>
                     )}
                 </Box>
             </Box>
-            <Card orientation="vertical">
-                <Typography sx={cardTitle}>Temperaturverlauf</Typography>
-                <Box sx={temperatureProgressListContainer}>
-                    {props.temperaturesForPeriodsOfTheDay.map((entry) =>
-                        <Box key={entry.dayPeriod}>
-                            <Typography>{`${entry.dayPeriod}`}</Typography>
-                            <LinearProgress
-                                determinate
-                                value={entry.value}
-                                sx={linearProgress}
-                            >
-                                <Typography
-                                    level="body-xs"
-                                    textColor="common.white"
-                                    sx={linearProgressContent}
-                                >
-                                    {`${entry.value}${entry.unit}`}
-                                </Typography>
-                            </LinearProgress>
-                        </Box>
-                    )}
-                </Box>
-            </Card>
         </Card>
     )
 }
 
 const overviewCardContainer: SxProps = {
     display: "grid",
-    gridTemplateColumns: {
-        lg: "1fr 1fr",
-        xs: "1fr",
-    },
+    gridTemplateColumns: "1fr",
     gap: 5,
     borderRadius: "sm",
 }
@@ -113,14 +90,16 @@ const overviewTemperatureValueContainer: SxProps = {
     justifyContent: "center",
     justifyItems: "center",
     alignSelf: "center",
+    textAlign: "center",
 }
 const temperatureValue: SxProps = {
-    fontSize: 65,
+    fontSize: 85,
 }
 const overviewValuesContainer: SxProps = {
     display: "flex",
-    justifyContent: "space-between",
-    gap: 3,
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: 7,
 }
 const linearProgress: SxProps = {
     "--LinearProgress-radius": "10px",
