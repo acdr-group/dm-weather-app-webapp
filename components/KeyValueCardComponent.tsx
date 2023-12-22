@@ -22,7 +22,7 @@ const KeyValueCardComponent: React.FC<Props> = (props: Props) => {
                 <Typography level="body-sm">{props.keyValue.description}</Typography>
                 <Typography sx={cardTitle}>{`${props.keyValue.value}${props.keyValue.unit}`}</Typography>
             </Box>
-            <CircularProgress value={props.keyValue.value} determinate thickness={8} size="lg">
+            <CircularProgress value={props.keyValue.value as number} determinate thickness={8} size="lg">
                 <Box component="div" sx={circularProgressContent}>
                     <Box>{props.keyValue.value}</Box>
                 </Box>

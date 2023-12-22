@@ -17,22 +17,6 @@ const KeyValueCardListComponent: React.FC<Props> = (props: Props) => {
                         keyValue={entry}
                     />
                 )}
-                {/*<Card orientation="horizontal" sx={cardItemContainer}>*/}
-                {/*    <Box sx={cardItemTextBlock}>*/}
-                {/*        <Typography sx={cardTitle}>Temperatur</Typography>*/}
-                {/*        <Typography level="body-sm">Lorem ipsum dolor sit amet</Typography>*/}
-                {/*    </Box>*/}
-                {/*    <Stack direction={"row"} spacing={1}>*/}
-                {/*        <Stack direction={"row"}>*/}
-                {/*            <ArrowDownwardOutlinedIcon/>*/}
-                {/*            <Typography sx={cardTitle}>10°C</Typography>*/}
-                {/*        </Stack>*/}
-                {/*        <Stack direction={"row"}>*/}
-                {/*            <ArrowUpwardOutlinedIcon/>*/}
-                {/*            <Typography sx={cardTitle}>35°C</Typography>*/}
-                {/*        </Stack>*/}
-                {/*    </Stack>*/}
-                {/*</Card>*/}
             </Box>
         </Box>
     )

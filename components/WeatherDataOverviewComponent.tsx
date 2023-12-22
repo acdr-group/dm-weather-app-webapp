@@ -148,7 +148,7 @@ const WeatherDataOverviewComponent: React.FC = () => {
                         description={weather.description}
                         measurementDate={weather.dateTime}
                         overviewWeatherValues={getOverviewValues()}
-                        currentTemperatureAndUnit={`${(weather.tempMax + weather.tempMin / 2).toFixed()}°`}
+                        currentTemperatureAndUnit={`${weather.temp.toFixed()}°`}
                         temperaturesForPeriodsOfTheDay={getTemperaturesForPeriodsOfTheDay()}
                     />
                     <TemperatureForecastForNextHoursComponent
