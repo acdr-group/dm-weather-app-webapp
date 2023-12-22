@@ -1,0 +1,8 @@
+version: '3'
+services:
+  dm-weather-app-webapp:
+    container_name: dm-weather-app-webapp
+    image: dm-weather-app-webapp:1.0.0
+    ports:
+        - "127.0.0.1:3000:3000"
+    restart: unless-stopped

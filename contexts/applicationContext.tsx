@@ -1,22 +1,11 @@
-"use client"
-import {Station} from "@/models/station";
-import {Sensor, SensorListResponse} from "@/models/sensor";
-import {SensorMeasurementWithTimestamps} from "@/models/sensorMeasurement";
-import {getReadingsApi, ReadingsQueryParams} from "@/api/reading";
+"use client";
 import React, {createContext, PropsWithChildren, useContext, useState} from "react";
 import {AxiosRequestConfig, AxiosResponse} from "axios";
-import {getStationByIdApi} from "@/api/station";
-import {getSensorOfStationBySensorIdApi, getSensorsOfStationApi} from "@/api/sensor";
 import {getWeatherApi, Weather} from "@/api/weather"
 import {Forecast, getForecastApi} from "@/api/forecast"
 import {Coordinate} from "@/api/coordinate";
 
 type ContextOutput = {
-    getStationById: (id: number) => Promise<AxiosResponse<Station, any>>
-    getSensorsOfStation: (stationId: number) => Promise<AxiosResponse<Sensor, any>>
-    getSensorOfStationBySensorId: (stationId: number, sensorId: number) => Promise<AxiosResponse<SensorListResponse, any>>
-    getReadings: (queryParams: ReadingsQueryParams) => Promise<AxiosResponse<SensorMeasurementWithTimestamps, any>>
-
     getWeather: () => Promise<Weather>
     getForecast: () => Promise<Forecast>
 }
@@ -45,22 +34,6 @@ export const ApplicationContextProvider: React.FC<PropsApplicationContext> = (pr
         url: process.env.NEXT_PUBLIC_BACKEND_SERVER_URL as string,
     };
 
-    const getStationById = async (id: number): Promise<AxiosResponse<Station, any>> => {
-        return await getStationByIdApi(id)
-    }
-
-    const getSensorsOfStation = async (stationId: number): Promise<AxiosResponse<Sensor, any>> => {
-        return await getSensorsOfStationApi(stationId)
-    }
-
-    const getSensorOfStationBySensorId = async (stationId: number, sensorId: number): Promise<AxiosResponse<SensorListResponse, any>> => {
-        return await getSensorOfStationBySensorIdApi(stationId, sensorId)
-    }
-
-    const getReadings = async (queryParams: ReadingsQueryParams): Promise<AxiosResponse<SensorMeasurementWithTimestamps, any>> => {
-        return await getReadingsApi(queryParams)
-    }
-
     const getWeather = async (): Promise<Weather> => {
         // TODO: Introduce a new context to store global query params like lang, units, lat and lon
         const requestConfig = {
@@ -83,17 +56,8 @@ export const ApplicationContextProvider: React.FC<PropsApplicationContext> = (pr
         };
     }
 
-    const changeLocation = (cityName: string) => {
-
-    }
-
     return (
         <ApplicationContext.Provider value={{
-            getStationById: getStationById,
-            getSensorsOfStation: getSensorsOfStation,
-            getSensorOfStationBySensorId: getSensorOfStationBySensorId,
-            getReadings: getReadings,
-
             getWeather,
             getForecast,
         }}>
