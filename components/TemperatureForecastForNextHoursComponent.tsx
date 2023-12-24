@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import Card from "@mui/joy/Card";
-import {Box, Chip, Stack} from "@mui/joy";
+import {Box, Chip, Stack, Theme, useTheme} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import Typography from "@mui/joy/Typography";
 import Image from "next/image";
@@ -19,6 +19,7 @@ type Props = {
 const TemperatureForecastForNextHoursComponent: React.FC<Props> = (props: Props) => {
 
     const ref = useRef<HTMLDivElement | null>(null)
+    const theme = useTheme();
     const { weatherList } = props
 
     const hourlyTemperatures: HourlyTemperature[] = useMemo<HourlyTemperature[]>(() => {
@@ -32,6 +33,7 @@ const TemperatureForecastForNextHoursComponent: React.FC<Props> = (props: Props)
                         width={55}
                         height={55}
                         alt={"weather-indicator"}
+                        style={{ boxShadow: "0 0 5px grey", borderRadius: "8px", backgroundColor: theme.vars.palette.primary["300"] }}
                         />,
                 }
             })
@@ -73,6 +75,7 @@ const cardContent: SxProps = {
 }
 const dayContainer: SxProps = {
     display: "grid",
+    gap: 1,
     justifyContent: "center",
     justifyItems: "center",
     px: 2.2,

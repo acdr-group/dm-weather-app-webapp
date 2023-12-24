@@ -1,12 +1,11 @@
 import React, {useEffect, useMemo, useCallback} from "react";
 import Typography from "@mui/joy/Typography";
 import Card from "@mui/joy/Card";
-import {Box, Divider, Stack} from "@mui/joy";
+import {Box, Divider, Stack, useTheme} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import LinearProgress from "@mui/joy/LinearProgress";
 import {START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA, useApplicationContext} from "@/contexts/applicationContext";
-import {SensorId} from "@/models/sensor";
 import ErrorComponent from "@/components/shared/ErrorComponent";
 import IconButton from "@mui/joy/IconButton";
 import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
@@ -29,6 +28,7 @@ type TemperatureValuesOfADay = {
 const WeeklyTemperaturesCardComponent: React.FC = () => {
 
     const applicationContext = useApplicationContext()
+    const theme = useTheme();
 
     const {
         data: forecast,
@@ -64,6 +64,7 @@ const WeeklyTemperaturesCardComponent: React.FC = () => {
                     width={55}
                     height={55}
                     alt={"weather-indicator"}
+                    style={{ boxShadow: "0 0 5px grey", borderRadius: "8px", backgroundColor: theme.vars.palette.primary["300"] }}
                 />,
             }
         }).slice(0, 5)
