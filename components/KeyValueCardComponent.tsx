@@ -10,11 +10,7 @@ import {useTheme} from "@mui/joy/styles";
 type Props = {
     keyValue: KeyValue
 }
-
 const KeyValueCardComponent: React.FC<Props> = (props: Props) => {
-
-    const theme = useTheme()
-
     return (
         <Card orientation="horizontal" sx={cardItemContainer}>
             <Box sx={cardItemTextBlock}>
@@ -36,6 +32,7 @@ const cardItemContainer: SxProps = {
     alignItems: "center",
     alignContent: "center",
     justifyContent: "space-between",
+    borderRadius: "lg",
     gap: 4,
 }
 const cardItemTextBlock: SxProps = {

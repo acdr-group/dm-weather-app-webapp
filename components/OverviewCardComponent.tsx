@@ -51,15 +51,14 @@ const OverviewCardComponent: React.FC<Props> = (props: Props) => {
 
 const overviewCardContainer: SxProps = {
     display: "grid",
-    gridTemplateColumns: "1fr",
-    gap: 5,
-    borderRadius: "sm",
+    borderRadius: "lg",
 }
 const overviewCardDataColumn: SxProps = {
     display: "grid",
     gridTemplateRows: "auto 1fr auto",
-    gap: 8,
+    gap: 3,
     py: 0.8,
+    px: 2,
 }
 const locationAndDateContainer: SxProps = {
     display: "flex",
@@ -76,10 +75,6 @@ const measurementDate: SxProps = {}
 const cardTitle: SxProps = {
     fontSize: 16,
     fontWeight: "600",
-}
-const temperatureProgressListContainer: SxProps = {
-    display: "grid",
-    gap: 1,
 }
 const overviewValueItem: SxProps = {
     display: "flex",

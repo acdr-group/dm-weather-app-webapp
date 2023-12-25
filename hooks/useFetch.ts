@@ -13,7 +13,7 @@ const useFetch = <T>(request: Promise<T>): UseFetchOutput<T> => {
     const [error, setError] = useState<unknown>(null)
 
     useEffect(() => {
-        fetchData()
+        (async () => await fetchData())()
     }, [])
 
     const fetchData = async () => {

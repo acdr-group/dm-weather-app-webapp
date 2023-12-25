@@ -4,15 +4,14 @@ import {Box} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import Image from "next/image";
 
-type Props = {}
-const CompanyLogoComponent: React.FC<Props> = (props: Props) => {
+const CompanyLogoComponent: React.FC = () => {
     return (
         <Box sx={logoContainer}>
             <Image
-                src={"/logo.png"}
+                src={"/dm-logo.svg"}
                 alt={"company-logo"}
-                width={30}
-                height={30}
+                width={35}
+                height={35}
             />
             <Typography level="title-md" sx={logoText}>
                 Wetter
@@ -22,7 +21,9 @@ const CompanyLogoComponent: React.FC<Props> = (props: Props) => {
 }
 const logoContainer: SxProps = {
     display: "flex",
-    gap: 1,
+    alignItems: "center",
+    alignContent: "center",
+    gap: 3,
 }
 
 const logoText: SxProps = {

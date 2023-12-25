@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, {forwardRef, useEffect} from "react";
+import React from "react";
 import {Box} from "@mui/joy";
 import {useApplicationContext} from "@/contexts/applicationContext";
 import useFetch from "@/hooks/useFetch";
@@ -157,8 +157,8 @@ const WeatherDataOverviewComponent: React.FC = () => {
                     <KeyValueCardListComponent keyValues={getKeyValues()}/>
                 </Box>
                 <Box sx={SuggestionAndWeeklyTemperatureContainer}>
-                    <SuggestionComponent weatherIcon={""} />
-                    <WeeklyTemperaturesCardComponent/>
+                    <SuggestionComponent weatherIcon={weather.icon} />
+                    <WeeklyTemperaturesCardComponent forecast={forecast} />
                 </Box>
             </Box>
         </Box>
@@ -172,15 +172,15 @@ const overviewWrapper: SxProps = {
         md: "1fr",
         xs: "1fr",
     },
-    gap: 3,
+    gap: 2,
 }
 const overviewCardAndFilterContainer: SxProps = {
     display: "grid",
-    gap: 3,
+    gap: 2,
 }
 const SuggestionAndWeeklyTemperatureContainer: SxProps = {
     display: "grid",
-    gap: 3,
+    gap: 2,
     gridTemplateRows: "max-content 1fr",
 }
 export default WeatherDataOverviewComponent

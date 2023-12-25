@@ -24,7 +24,7 @@ const KeyValueCardListComponent: React.FC<Props> = (props: Props) => {
 
 const keyValueListWrapper: SxProps = {
     display: "grid",
-    gap: 4,
+    gap: 3,
 }
 const keyValueListContainer: SxProps = {
     display: "grid",
@@ -32,7 +32,7 @@ const keyValueListContainer: SxProps = {
         lg: "repeat(3, 1fr)",
         xs: "1fr",
     },
-    gap: 3,
+    gap: 2,
 }
 
 export default KeyValueCardListComponent

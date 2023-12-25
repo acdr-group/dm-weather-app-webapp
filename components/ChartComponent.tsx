@@ -36,6 +36,7 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                 text: {
                     fill: mode === "light" ? theme.vars.palette.neutral["700"] : theme.vars.palette.neutral["400"],
                     fontFamily: "Inter",
+                    fontSize: "12px",
                     outlineColor: "transparent"
                 }
             },
@@ -44,7 +45,7 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                     fill: mode === "light" ? theme.vars.palette.neutral["700"]  : theme.vars.palette.neutral["400"],
                     fontFamily: "Inter",
                     fontWeight: "500",
-                    fontSize: "15px",
+                    fontSize: "16px",
                     outlineColor: "transparent"
                 },
             }
@@ -92,11 +93,14 @@ const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
                         enableCrosshair={true}
                         theme={chartTheme}
                         enableArea={true}
+                        areaOpacity={0.3}
+                        areaBaselineValue={30}
+                        areaBlendMode={"color-burn"}
                         colors={theme.vars.palette.primary[500]}
-                        pointSize={10}
+                        pointSize={15}
                         pointColor={theme.vars.palette.primary[500]}
-                        pointBorderWidth={1}
-                        pointBorderColor={{from: "serieColor"}}
+                        pointBorderWidth={2}
+                        pointBorderColor={"white"}
                         pointLabelYOffset={-12}
                         isInteractive={true}
                         useMesh={true}

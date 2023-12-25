@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, {useState} from "react";
 import {ColorPaletteProp} from "@mui/joy/styles";
 import Box from "@mui/joy/Box";
@@ -7,45 +7,13 @@ import {Theme} from "@mui/joy";
 import ListItemButton from "@mui/joy/ListItemButton";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Sheet from "@mui/joy/Sheet";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import AssessmentOutlinedIcon from "@mui/icons-material/AssessmentOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import {SxProps} from "@mui/system";
 import {usePathname, useRouter} from "next/navigation";
 import Typography from "@mui/joy/Typography";
+import {useCustomNavigation} from "@/hooks/useCustomNavigation";
 
-type SideNavigationButton = {
-    label: string
-    icon: React.ReactNode
-    chip?: React.ReactNode
-    isActive: boolean
-    onClick: () => void
-}
 const SideNavigationComponent = () => {
-
-    const router = useRouter()
-    const pathname = usePathname()
-
-    const sideNavigationButtons: SideNavigationButton[] = [
-        {
-            label: "Vorhersage",
-            icon: <HomeOutlinedIcon />,
-            isActive: pathname === "/",
-            onClick: () => router.push("/"),
-        },
-        {
-            label: "Analysen",
-            icon: <AssessmentOutlinedIcon />,
-            isActive: pathname === "/analysis",
-            onClick: () => router.push("/analysis"),
-        },
-        {
-            label: "Einstellungen",
-            icon: <SettingsOutlinedIcon />,
-            isActive: pathname === "/settings",
-            onClick: () => router.push("/settings"),
-        }
-    ]
+    const { navButtons } = useCustomNavigation();
 
     return (
         <Box sx={sideNavigationContainer}>
@@ -55,7 +23,7 @@ const SideNavigationComponent = () => {
                 sx={sideNavigationContent}
             >
                 <List sx={navigationButtonListContainer}>
-                    {sideNavigationButtons.map((button) =>
+                    {navButtons.map((button) =>
                         <ListItemButton
                             key={button.label}
                             selected={button.isActive}
@@ -66,7 +34,9 @@ const SideNavigationComponent = () => {
                                 fontWeight: button.isActive ? "bold" : "unset",
                             }}
                         >
-                            <ListItemDecorator sx={{ color: "inherit", fontWeight: "inherit" }}>{button.icon}</ListItemDecorator>
+                            <ListItemDecorator sx={{ color: "inherit", fontWeight: "inherit" }}>
+                                <button.icon/>
+                            </ListItemDecorator>
                             <Typography
                                 sx={{
                                     color: "inherit",
@@ -84,9 +54,10 @@ const SideNavigationComponent = () => {
 }
 
 const sideNavigationContainer: SxProps = {
-    display: {
-        lg: "flex",
-        xs: "none",
+    display: "flex",
+    "@media screen and (max-width: 1200px)": {
+        display: "none",
+        position: "unset",
     },
     overflow: "auto",
     position: "sticky",
@@ -105,6 +76,7 @@ const navigationButtonListContainer: SxProps = {
     "--List-gap": "4px",
     flexGrow: 0,
     minWidth: 200,
+    width: "100%",
 }
 
 export default SideNavigationComponent

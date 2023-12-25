@@ -193,11 +193,12 @@ const settingSectionContainer: SxProps = {
     display: "flex",
     flexDirection: "column",
     flexWrap: "wrap",
+    borderRadius: "xl",
     gap: 4,
 }
 const settingSectionItemListContainer: SxProps = {
     minWidth: 240,
-    borderRadius: "md",
+    borderRadius: "lg",
 }
 const listItem: SxProps = {
     px: {

@@ -1,8 +1,7 @@
-import { extendTheme } from '@mui/joy/styles';
-import {Theme} from "@mui/joy";
+import { extendTheme } from "@mui/joy/styles";
 import {ThemeItem} from "@/contexts/themeContext";
 
-declare module '@mui/joy/styles' {}
+declare module "@mui/joy/styles" {}
 
 const amberTheme = extendTheme({
     "colorSchemes": {
@@ -457,5 +456,3 @@ export const customThemes: ThemeItem[] = [
         value: neutralTheme,
     },
 ]
-
-export default amberTheme

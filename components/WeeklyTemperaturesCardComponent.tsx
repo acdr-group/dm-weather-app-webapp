@@ -1,17 +1,10 @@
-import React, {useEffect, useMemo, useCallback} from "react";
+import React, {useMemo, useCallback} from "react";
 import Typography from "@mui/joy/Typography";
 import Card from "@mui/joy/Card";
 import {Box, Divider, Stack, useTheme} from "@mui/joy";
 import {SxProps} from "@mui/system";
-import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import LinearProgress from "@mui/joy/LinearProgress";
-import {START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA, useApplicationContext} from "@/contexts/applicationContext";
-import ErrorComponent from "@/components/shared/ErrorComponent";
-import IconButton from "@mui/joy/IconButton";
-import ArrowBackIosOutlinedIcon from "@mui/icons-material/ArrowBackIosOutlined";
-import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
 import {v4 as uuid} from "uuid"
-import useFetch from "@/hooks/useFetch";
 import {Forecast} from "@/api/forecast";
 import {Weather} from "@/api/weather";
 import Image from "next/image";
@@ -25,21 +18,12 @@ type TemperatureValuesOfADay = {
     icon: any
 }
 
-const WeeklyTemperaturesCardComponent: React.FC = () => {
-
-    const applicationContext = useApplicationContext()
+type Props = {
+    forecast: Forecast
+}
+const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
     const theme = useTheme();
-
-    const {
-        data: forecast,
-        isLoading: isForecastDataLoading,
-        error: errorOnLoadingForecastData,
-    } = useFetch<Forecast>(applicationContext.getForecast())
-
-    useEffect(() => {
-        if (!forecast) return
-        extractDatesFromWeatherList(forecast.weatherList)
-    }, [forecast]);
+    const { forecast } = props;
 
     const extractDatesFromWeatherList = useCallback((weatherList: Weather[]): Weather[] => {
         return weatherList.reduce((acc: Weather[], curr: Weather) =>
@@ -72,51 +56,38 @@ const WeeklyTemperaturesCardComponent: React.FC = () => {
 
     const temperatureValues = useMemo(() => resolveDaysFromForecast(), [forecast]);
 
-    const formatDate = useCallback((date: Date): string => {
-        return date.toLocaleDateString()
-    }, []);
-
-    if (isForecastDataLoading || forecast === undefined) return <Box>Vorhersage wird geladen...</Box>
-
-    if (errorOnLoadingForecastData) return <Box>Ein Fehler ist aufgetretten</Box>
-
     return (
         <Card orientation="vertical" sx={cardContainer}>
             <Box sx={cardHeaderContainer}>
-                <Typography level="title-lg" sx={cardHeader}>{temperatureValues.length} Tage Wetter</Typography>
+                <Typography level="title-lg" sx={cardHeader}>{temperatureValues.length}-Tage-Vorhersage</Typography>
             </Box>
-            {errorOnLoadingForecastData ?
-                <ErrorComponent message={errorOnLoadingForecastData.toString()}/> :
-                <>
-                    <Stack direction={"column"} spacing={2}>
-                        {temperatureValues.map((entry, index, arr) =>
-                            <React.Fragment key={uuid()}>
-                                <Box sx={weekListItem}>
-                                    <Box>
-                                        <Typography sx={cardTitle}>
-                                            {entry.day.getDate() === new Date().getDate() ? "Heute" : entry.day.toLocaleDateString("de-DE", {weekday: "long"})}
-                                        </Typography>
-                                        <Typography noWrap level="body-sm">
-                                            {entry.day.toLocaleDateString("de-DE", {day: "2-digit", month: "short", year: "numeric"})}
-                                        </Typography>
-                                    </Box>
-                                    {entry.icon}
-                                    <Box sx={minMaxAverageContainer}>
-                                        <Typography noWrap level="body-sm">{`${entry.min}${entry.unit}`}</Typography>
-                                        <LinearProgress
-                                            determinate
-                                            value={entry.avg}
-                                            size="lg"
-                                        />
-                                        <Typography noWrap level="body-sm">{`${entry.max}${entry.unit}`}</Typography>
-                                    </Box>
-                                </Box>
-                                {index !== arr.length - 1 ? <Divider /> : null}
-                            </React.Fragment>
-                        )}
-                    </Stack>
-                </>
-            }
+            <Stack direction={"column"} spacing={2}>
+                {temperatureValues.map((entry, index, arr) =>
+                    <React.Fragment key={uuid()}>
+                        <Box sx={weekListItem}>
+                            <Box>
+                                <Typography sx={cardTitle}>
+                                    {entry.day.getDate() === new Date().getDate() ? "Heute" : entry.day.toLocaleDateString("de-DE", {weekday: "long"})}
+                                </Typography>
+                                <Typography noWrap level="body-sm">
+                                    {entry.day.toLocaleDateString("de-DE", {day: "2-digit", month: "short", year: "numeric"})}
+                                </Typography>
+                            </Box>
+                            {entry.icon}
+                            <Box sx={minMaxAverageContainer}>
+                                <Typography noWrap level="body-sm">{`${entry.min}${entry.unit}`}</Typography>
+                                <LinearProgress
+                                    determinate
+                                    value={entry.avg}
+                                    size="lg"
+                                />
+                                <Typography noWrap level="body-sm">{`${entry.max}${entry.unit}`}</Typography>
+                            </Box>
+                        </Box>
+                        {index !== arr.length - 1 ? <Divider /> : null}
+                    </React.Fragment>
+                )}
+            </Stack>
         </Card>
     )
 }
@@ -125,6 +96,7 @@ const cardContainer: SxProps = {
     display: "grid",
     alignItems: "start",
     alignContent: "start",
+    borderRadius: "lg",
     gap: 4,
 }
 const cardHeaderContainer: SxProps = {

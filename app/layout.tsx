@@ -1,7 +1,6 @@
 "use client"
 import type {Metadata} from "next"
 import {Inter} from "next/font/google"
-//import './globals.css'
 import "@fontsource/inter";
 import {PropsWithChildren} from "react";
 import ThemeRegistry from "@/app/ThemeRegistry";
@@ -79,6 +78,7 @@ const mainContent: SxProps = {
     overflow: "auto",
     height: "100%",
     width: "100%",
+    px: 3,
 }
 const pageContent: SxProps = {
     width: "100%",

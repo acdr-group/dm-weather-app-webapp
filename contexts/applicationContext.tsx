@@ -1,6 +1,6 @@
 "use client";
 import React, {createContext, PropsWithChildren, useContext, useState} from "react";
-import {AxiosRequestConfig, AxiosResponse} from "axios";
+import {AxiosRequestConfig} from "axios";
 import {getWeatherApi, Weather} from "@/api/weather"
 import {Forecast, getForecastApi} from "@/api/forecast"
 import {Coordinate} from "@/api/coordinate";
@@ -17,8 +17,6 @@ export const useApplicationContext = (): ContextOutput => {
     return useContext(ApplicationContext)
 }
 
-export const START_DATE_STAMP_OF_BACKWARDS_DELIVERY_OF_DATA = "2022-09-01T00:00:00Z"
-
 type PropsApplicationContext = PropsWithChildren & {}
 
 const INITIAL_COORDINATE: Coordinate = {
@@ -27,7 +25,7 @@ const INITIAL_COORDINATE: Coordinate = {
 }
 export const ApplicationContextProvider: React.FC<PropsApplicationContext> = (props: PropsApplicationContext) => {
 
-    const [coordinate, setCoordinate] = useState<Coordinate>(INITIAL_COORDINATE);
+    const [coordinate] = useState<Coordinate>(INITIAL_COORDINATE);
 
     const baseAxiosRequestConfig: AxiosRequestConfig<string> = {
         method: "GET",
@@ -64,17 +62,6 @@ export const ApplicationContextProvider: React.FC<PropsApplicationContext> = (pr
             {props.children}
         </ApplicationContext.Provider>
     )
-}
-
-type DataValueMap = {
-    date: Date
-    value: number
-}
-
-type MinMaxAvg = {
-    min: number
-    max: number
-    avg: number
 }
 
 const formatWeatherResponse = (weather: any): Weather => {

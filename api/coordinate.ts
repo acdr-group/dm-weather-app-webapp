@@ -1,4 +1,3 @@
-import {AxiosRequestConfig} from "axios/index";
 import axios, {AxiosResponse} from "axios";
 
 export type Coordinate = {

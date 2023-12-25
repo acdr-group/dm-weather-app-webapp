@@ -1,10 +1,8 @@
 "use client"
 import React from "react";
 import Box from "@mui/joy/Box";
-import Input from "@mui/joy/Input";
 import IconButton from "@mui/joy/IconButton";
 import Sheet from "@mui/joy/Sheet";
-import SearchIcon from "@mui/icons-material/Search";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import {SxProps} from "@mui/system";
 import CompanyLogoComponent from "@/components/shared/CompanyLogoComponent";
@@ -12,6 +10,7 @@ import {Theme} from "@mui/joy";
 import {useFullScreen} from "@/hooks/useFullScreen";
 import NotificationDrawerComponent from "@/components/NotificationDrawerComponent";
 import {AppNotification} from "@/models/notification";
+import NavigationDrawer from "@/components/NavigationDrawer";
 
 const HeaderComponent: React.FC = () => {
     const { enterFullScreen } = useFullScreen()
@@ -33,14 +32,10 @@ const HeaderComponent: React.FC = () => {
             invertedColors
             sx={headerContainer}
         >
-            <CompanyLogoComponent/>
-            {/*<Input*/}
-            {/*    placeholder="Search"*/}
-            {/*    variant="soft"*/}
-            {/*    size="md"*/}
-            {/*    startDecorator={<SearchIcon fontSize="small"/>}*/}
-            {/*    sx={searchInput}*/}
-            {/*/>*/}
+            <Box sx={drawerTogglerAndLogoContainer}>
+                <NavigationDrawer/>
+                <CompanyLogoComponent/>
+            </Box>
             <Box sx={iconListContainer}>
                 <IconButton size="sm" onClick={() => enterFullScreen()}>
                     <FullscreenIcon fontSize="small"/>
@@ -57,7 +52,7 @@ const headerContainer: SxProps<Theme> = {
     justifyItems: "space-between",
     justifyContent: "space-between",
     flexGrow: 1,
-    px: 4,
+    px: 3,
     py: 1.5,
     position: "sticky",
     top: 0,
@@ -67,13 +62,10 @@ const headerContainer: SxProps<Theme> = {
     background: theme =>
         `linear-gradient(to top, ${theme.vars.palette.primary[600]}, ${theme.vars.palette.primary[500]})`,
 }
-const searchInput: SxProps = {
-    "--Input-paddingInline": "12px",
-    width: "30%",
-    display: {
-        xs: "none",
-        lg: "flex",
-    },
+const drawerTogglerAndLogoContainer: SxProps = {
+    display: "flex",
+    alignItems: "center",
+    gap: 2,
 }
 const iconListContainer: SxProps = {
     display: "flex",

@@ -1,7 +1,7 @@
 "use client"
-import React, {useEffect, useMemo, useRef, useState} from "react";
+import React, {useMemo} from "react";
 import Card from "@mui/joy/Card";
-import {Box, Chip, Stack, Theme, useTheme} from "@mui/joy";
+import {Box, Chip, Stack, useTheme} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import Typography from "@mui/joy/Typography";
 import Image from "next/image";
@@ -17,8 +17,6 @@ type Props = {
     weatherList: Weather[]
 }
 const TemperatureForecastForNextHoursComponent: React.FC<Props> = (props: Props) => {
-
-    const ref = useRef<HTMLDivElement | null>(null)
     const theme = useTheme();
     const { weatherList } = props
 
@@ -40,7 +38,7 @@ const TemperatureForecastForNextHoursComponent: React.FC<Props> = (props: Props)
     }, [props.weatherList])
 
     return (
-        <Card orientation="vertical" ref={ref} sx={cardContainer} data-cy="twenty-four-hours-temperature-wrapper">
+        <Card orientation="vertical" sx={cardContainer} data-cy="twenty-four-hours-temperature-wrapper">
             <Typography level="title-lg" sx={cardHeader}>Temperaturen in den nächsten Stunden</Typography>
             <Stack direction="row" sx={cardContent} data-cy="twenty-four-hours-temperature-container">
                 {hourlyTemperatures.map((entry, index) =>
@@ -64,7 +62,8 @@ const cardContainer: SxProps = {
     display: "grid",
     gap: 4,
     overflowX: "auto",
-    justifyContent: "stretch"
+    justifyContent: "stretch",
+    borderRadius: "lg",
 }
 const cardHeader: SxProps = {
     justifySelf: "center",
@@ -81,5 +80,4 @@ const dayContainer: SxProps = {
     px: 2.2,
     borderRadius: 3,
 }
-
 export default TemperatureForecastForNextHoursComponent

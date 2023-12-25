@@ -23,8 +23,6 @@ enum Sensor {
 }
 
 const AnalysisPage: React.FC = () => {
-
-    const [sensor, setSensor] = useState();
     const applicationContext = useApplicationContext()
 
     const [selectedSensor, setSelectedSensor] = useState<Sensor>(Sensor.Temperatur);
@@ -111,12 +109,11 @@ const AnalysisPage: React.FC = () => {
                             </Box>
                             <Card sx={{
                                 display: "flex",
-                                width: {
-                                    lg: "1520px",
-                                    md: "100%",
-                                    xs: "100%",
-                                },
+                                width: "100%",
                                 height: "420px",
+                                minheight: "420px",
+                                borderRadius: "lg",
+                                py: 4,
                             }}>
                                 <Box component="div">
                                     <Typography level={"title-lg"}>

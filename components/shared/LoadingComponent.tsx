@@ -7,7 +7,6 @@ import Typography from "@mui/joy/Typography";
 type Props = {
     message?: string
 }
-
 const LoadingComponent: React.FC<Props> = (props: Props) => {
     const [progress, setProgress] = useState(0);
 
@@ -28,5 +27,4 @@ const LoadingComponent: React.FC<Props> = (props: Props) => {
         </Stack>
     )
 }
-
 export default LoadingComponent
