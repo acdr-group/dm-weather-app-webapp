@@ -3,12 +3,13 @@ import Typography from "@mui/joy/Typography";
 import {Box} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import Image from "next/image";
+import CompanyLogo from "../../public/dm-logo.svg";
 
 const CompanyLogoComponent: React.FC = () => {
     return (
         <Box sx={logoContainer}>
             <Image
-                src={"/dm-logo.svg"}
+                src={CompanyLogo}
                 alt={"company-logo"}
                 width={35}
                 height={35}

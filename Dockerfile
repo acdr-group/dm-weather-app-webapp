@@ -3,8 +3,9 @@ ARG NODE_VERSION=21.1.0
 
 # STAGE 1: BUILDER
 FROM node:${NODE_VERSION}-alpine as builder
+RUN mkdir /app
 WORKDIR /app
-COPY package.json package-lock.json ./
+COPY package*.json .
 RUN npm install
 COPY . .
 RUN npm run build
