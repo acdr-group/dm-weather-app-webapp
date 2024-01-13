@@ -28,7 +28,7 @@ const OverviewCardComponent: React.FC<Props> = (props: Props) => {
                     </Box>
                     <Box sx={measurementDate}>
                         {props.measurementDate
-                            .toLocaleDateString("de-DE", {day: "2-digit", month: "short", year: "numeric"})
+                            .toLocaleDateString("de-DE", {day: "2-digit", month: "short", year: "2-digit"})
                         }
                     </Box>
                 </Box>
@@ -59,6 +59,9 @@ const overviewCardDataColumn: SxProps = {
     gap: 3,
     py: 0.8,
     px: 2,
+    "@media screen and (max-width: 900px)": {
+        px: 1,
+    },
 }
 const locationAndDateContainer: SxProps = {
     display: "flex",
@@ -77,8 +80,9 @@ const cardTitle: SxProps = {
     fontWeight: "600",
 }
 const overviewValueItem: SxProps = {
-    display: "flex",
-    gap: 0.8,
+    display: "grid",
+    justifyContent: "center",
+    justifyItems: "center",
 }
 const overviewTemperatureValueContainer: SxProps = {
     display: "grid",

@@ -1,7 +1,7 @@
 import React, {useMemo, useCallback} from "react";
 import Typography from "@mui/joy/Typography";
 import Card from "@mui/joy/Card";
-import {Box, Divider, Stack, useTheme} from "@mui/joy";
+import {Box, Button, Divider, Stack, useTheme} from "@mui/joy";
 import {SxProps} from "@mui/system";
 import LinearProgress from "@mui/joy/LinearProgress";
 import {v4 as uuid} from "uuid"
@@ -38,15 +38,15 @@ const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
         return extractDatesFromWeatherList(forecast.weatherList).map(w => {
             return {
                 day: w.dateTime,
-                min: Number(w.tempMin.toFixed(1)),
-                max: Number(w.tempMax.toFixed(1)),
-                avg: Number(w.tempMin + w.tempMax / 2),
-                unit: "°C",
+                min: Number(w.tempMin.toFixed()),
+                max: Number(w.tempMax.toFixed()),
+                avg: Number((w.tempMin + w.tempMax)  / 2),
+                unit: "°",
                 icon: <Image
                     src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
                     loader={() => `https://openweathermap.org/img/wn/${w.icon}@2x.png`}
-                    width={55}
-                    height={55}
+                    width={45}
+                    height={45}
                     alt={"weather-indicator"}
                     style={{ boxShadow: "0 0 5px grey", borderRadius: "8px", backgroundColor: theme.vars.palette.primary["300"] }}
                 />,
@@ -61,7 +61,7 @@ const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
             <Box sx={cardHeaderContainer}>
                 <Typography level="title-lg" sx={cardHeader}>{temperatureValues.length}-Tage-Vorhersage</Typography>
             </Box>
-            <Stack direction={"column"} spacing={2}>
+            <Stack direction={"column"} spacing={2.5} sx={{ pt: 3 }}>
                 {temperatureValues.map((entry, index, arr) =>
                     <React.Fragment key={uuid()}>
                         <Box sx={weekListItem}>
@@ -80,6 +80,7 @@ const WeeklyTemperaturesCardComponent: React.FC<Props> = (props: Props) => {
                                     determinate
                                     value={entry.avg}
                                     size="lg"
+                                    sx={{ width: 50, maxWidth: 100, justifySelf: "center" }}
                                 />
                                 <Typography noWrap level="body-sm">{`${entry.max}${entry.unit}`}</Typography>
                             </Box>
@@ -117,7 +118,7 @@ const cardTitle: SxProps = {
 }
 const weekListItem: SxProps = {
     display: "grid",
-    gridTemplateColumns: "minmax(50px, 100px) max-content 1fr",
+    gridTemplateColumns: "minmax(50px, 1fr) max-content auto",
     gap: 5,
     alignItems: "center",
     alignContent: "center",
@@ -128,6 +129,9 @@ const minMaxAverageContainer: SxProps = {
     gap: 0.4,
     alignContent: "center",
     alignItems: "center",
+    justifySelf: "end",
+    //justifyContent: "end",
+    //justifyItems: "end",
 }
 const weatherIcon: SxProps = {
     fontSize: {

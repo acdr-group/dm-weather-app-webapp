@@ -45,12 +45,12 @@ const WeatherDataOverviewComponent: React.FC = () => {
             },
             {
                 icon: <WaterDropOutlinedIcon/>,
-                value: weather.humidity,
+                value: weather.humidity.toFixed(),
                 unit: "%",
             },
             {
                 icon: <AirOutlinedIcon/>,
-                value: weather.windSpeed,
+                value: weather.windSpeed.toFixed(),
                 unit: "m/s",
             },
             {
@@ -106,20 +106,20 @@ const WeatherDataOverviewComponent: React.FC = () => {
         return [
             {
                 title: "Gefühlt",
-                value: weather.feelsLike,
-                unit: "°C",
+                value: weather.feelsLike.toFixed(),
+                unit: "°",
                 icon: <WifiTetheringOutlinedIcon/>,
             },
             {
                 title: "Höchste Temp.",
-                value: weather.tempMax,
-                unit: "°C",
+                value: weather.tempMax.toFixed(),
+                unit: "°",
                 icon: <WifiTetheringOutlinedIcon/>,
             },
             {
                 title: "Niedrigste Temp.",
-                value: weather.tempMin,
-                unit: "°C",
+                value: weather.tempMin.toFixed(),
+                unit: "°",
                 icon: <WifiTetheringOutlinedIcon/>,
             },
         ]
