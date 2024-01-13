@@ -18,6 +18,7 @@ import {AppNotification} from "@/models/notification";
 import {SxProps} from "@mui/system";
 import InfoIcon from "@mui/icons-material/Info";
 import WarningIcon from "@mui/icons-material/Warning";
+import {useMediaQuery} from "@mui/material";
 
 type PropsNotificationDrawer = {
     notifications: AppNotification[]
@@ -25,6 +26,7 @@ type PropsNotificationDrawer = {
 const NotificationDrawerComponent: React.FC<PropsNotificationDrawer> = (props: PropsNotificationDrawer) => {
 
     const [open, setOpen] = useState<boolean>(false)
+    const isScreenSmall = useMediaQuery("@media screen and (max-width: 900px)")
 
     const getNotificationIcon = (notificationType: AppNotification["type"]): JSX.Element => {
         switch (notificationType) {
@@ -43,7 +45,7 @@ const NotificationDrawerComponent: React.FC<PropsNotificationDrawer> = (props: P
                 </IconButton>
             </Badge>
             <Drawer
-                size="md"
+                size={isScreenSmall ? "lg" : "md"}
                 anchor="right"
                 variant="plain"
                 open={open}
@@ -86,7 +88,7 @@ const NotificationCardComponent: React.FC<PropsNotificationCard> = (props: Props
             <CardContent>
                 <Stack direction={"row"} spacing={2}>
                     <Box>{props.icon}</Box>
-                    <Stack spacing={1}>
+                    <Stack spacing={1} sx={{ flex: 1 }}>
                         <Stack direction="row" spacing={2}>
                             <Typography level="title-sm" sx={notificationTitle}>{props.title}</Typography>
                             <Typography level="title-sm">
@@ -120,6 +122,9 @@ const drawerContent: SxProps = {
     gap: 2,
     height: "100%",
     overflow: "auto",
+    "@media screen and (max-width: 900px)": {
+        borderRadius: "unset",
+    },
 }
 const divider: SxProps = {
     mt: "auto"

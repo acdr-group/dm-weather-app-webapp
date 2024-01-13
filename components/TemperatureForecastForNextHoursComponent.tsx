@@ -24,12 +24,12 @@ const TemperatureForecastForNextHoursComponent: React.FC<Props> = (props: Props)
         return weatherList.map(w => {
                 return {
                     date: w.dateTime,
-                    temp: `${w.temp.toFixed()}°C`,
+                    temp: `${w.temp.toFixed()}°`,
                     icon: <Image
                         src={`https://openweathermap.org/img/wn/${w.icon}@2x.png`}
                         loader={() => `https://openweathermap.org/img/wn/${w.icon}@2x.png`}
-                        width={55}
-                        height={55}
+                        width={45}
+                        height={45}
                         alt={"weather-indicator"}
                         style={{ boxShadow: "0 0 5px grey", borderRadius: "8px", backgroundColor: theme.vars.palette.primary["300"] }}
                         />,
@@ -61,16 +61,17 @@ const TemperatureForecastForNextHoursComponent: React.FC<Props> = (props: Props)
 const cardContainer: SxProps = {
     display: "grid",
     gap: 4,
-    overflowX: "auto",
     justifyContent: "stretch",
     borderRadius: "lg",
+    overflowX: "auto",
 }
 const cardHeader: SxProps = {
     justifySelf: "center",
+    textAlign: "center",
 }
 const cardContent: SxProps = {
     display: "flex",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
 }
 const dayContainer: SxProps = {
     display: "grid",

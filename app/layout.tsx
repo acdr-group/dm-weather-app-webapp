@@ -79,6 +79,7 @@ const mainContent: SxProps = {
     height: "100%",
     width: "100%",
     px: 3,
+    //transform: "scale(0.95)",
 }
 const pageContent: SxProps = {
     width: "100%",

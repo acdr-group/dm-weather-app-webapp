@@ -19,7 +19,7 @@ const HeaderComponent: React.FC = () => {
         {
             id: "f01c2015-fb8b-4b0f-ac67-a07fc1b5b55b",
             title: "Willkommen in der dmTech-Wetter-App",
-            message: "Willkommen! Entdecke das Wetter mit uns – immer aktuell und zuverlässig",
+            message: "Entdecke eine neue Dimension der Wettervorhersage – immer aktuell und zuverlässig",
             type: "info",
             creationDate: new Date(),
         },
