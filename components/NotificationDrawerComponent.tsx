@@ -23,6 +23,13 @@ import {useMediaQuery} from "@mui/material";
 type PropsNotificationDrawer = {
     notifications: AppNotification[]
 }
+
+/**
+ * NotificationDrawerComponent is a React functional component that represents a notification drawer.
+ *
+ * @param {PropsNotificationDrawer} props - The props for the NotificationDrawerComponent.
+ * @returns {JSX.Element} The rendered notification drawer.
+ */
 const NotificationDrawerComponent: React.FC<PropsNotificationDrawer> = (props: PropsNotificationDrawer) => {
 
     const [open, setOpen] = useState<boolean>(false)

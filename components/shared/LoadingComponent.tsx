@@ -7,6 +7,17 @@ import Typography from "@mui/joy/Typography";
 type Props = {
     message?: string
 }
+
+/**
+ * A loading component that displays a progress bar and a message.
+ *
+ * @component
+ *
+ * @param {object} props - The properties passed to the component.
+ * @param {string} props.message - The message to be displayed.
+ *
+ * @returns {JSX.Element} The loading component UI.
+ */
 const LoadingComponent: React.FC<Props> = (props: Props) => {
     const [progress, setProgress] = useState(0);
 

@@ -7,6 +7,16 @@ type Props = PropsWithChildren & {
     title?: string
     subtitle?: string
 }
+
+/**
+ * React functional component for rendering a page layout.
+ *
+ * @param {Object} props - The props object containing the component's input parameters.
+ * @param {string} props.title - The title of the page.
+ * @param {string} props.subtitle - The subtitle of the page.
+ * @param {ReactNode} props.children - The content to be rendered inside the page layout.
+ * @returns {ReactElement} The rendered page layout.
+ */
 const PageLayoutComponent: React.FC<Props> = (props: Props) => {
     return (
         <Box sx={pageWrapper}>

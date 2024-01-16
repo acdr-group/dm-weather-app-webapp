@@ -7,6 +7,15 @@ import KeyValueCardComponent from "@/components/KeyValueCardComponent";
 type Props = {
     keyValues: KeyValue[]
 }
+
+/**
+ * KeyValueCardListComponent is a functional component that renders a list of KeyValueCardComponents.
+ *
+ * @param {Object} props - The props object that contains the keyValues property.
+ * @param {Array<Object>} props.keyValues - An array of objects representing the key-value pairs to be rendered.
+ *
+ * @returns {ReactElement} The rendered KeyValueCardListComponent.
+ */
 const KeyValueCardListComponent: React.FC<Props> = (props: Props) => {
     return (
         <Box sx={keyValueListWrapper}>

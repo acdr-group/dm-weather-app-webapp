@@ -10,6 +10,20 @@ import {useTheme} from "@mui/joy/styles";
 type Props = {
     keyValue: KeyValue
 }
+
+/**
+ * Key Value Card Component
+ * @component
+ *
+ * @param {Object} props - The properties object.
+ * @param {Object} props.keyValue - The key value object.
+ * @param {string} props.keyValue.title - The title of the key value.
+ * @param {string} props.keyValue.description - The description of the key value.
+ * @param {number} props.keyValue.value - The value of the key value.
+ * @param {string} props.keyValue.unit - The unit of the key value.
+ *
+ * @returns {React.Component} The Key Value Card Component.
+ */
 const KeyValueCardComponent: React.FC<Props> = (props: Props) => {
     return (
         <Card orientation="horizontal" sx={cardItemContainer}>

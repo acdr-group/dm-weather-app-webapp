@@ -5,6 +5,12 @@ type OutputUseFullScreen = {
     isFullScreen: boolean
     enterFullScreen: () => void
 }
+
+/**
+ * A custom hook that provides functionality for entering and exiting full screen mode.
+ *
+ * @returns {OutputUseFullScreen} The output object containing the current full screen status and the function to enter full screen mode.
+ */
 export const useFullScreen = (): OutputUseFullScreen => {
 
     const router = useRouter()

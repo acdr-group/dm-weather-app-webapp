@@ -28,6 +28,11 @@ export type Weather = {
     windGust: number;
 }
 
+/**
+ * Sends a request to the weather API and retrieves the weather data.
+ * @param {AxiosRequestConfig} requestConfig - The request configuration object for the API call.
+ * @returns {Promise<AxiosResponse<Weather>>} - A promise that resolves to the axios response containing the weather data.
+ */
 export const getWeatherApi = async (requestConfig: AxiosRequestConfig): Promise<AxiosResponse<Weather>> => {
     return await axios.request<Weather>(requestConfig)
 }

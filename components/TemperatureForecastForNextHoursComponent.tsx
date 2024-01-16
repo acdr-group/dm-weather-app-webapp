@@ -16,6 +16,14 @@ type HourlyTemperature = {
 type Props = {
     weatherList: Weather[]
 }
+
+/**
+ * Component that displays the temperature forecast for the next hours.
+ *
+ * @component
+ * @param {Props} props - The properties passed to the component.
+ * @returns {JSX.Element} The rendered component.
+ */
 const TemperatureForecastForNextHoursComponent: React.FC<Props> = (props: Props) => {
     const theme = useTheme();
     const { weatherList } = props

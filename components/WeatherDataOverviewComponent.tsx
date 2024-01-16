@@ -20,6 +20,12 @@ import {Weather} from "@/api/weather";
 import {Forecast} from "@/api/forecast";
 import {SuggestionComponent} from "@/components/SuggestionComponent";
 import LoadingComponent from "@/components/shared/LoadingComponent";
+
+/**
+ * React functional component that displays the weather data overview.
+ *
+ * @returns JSX.Element - The rendered component.
+ */
 const WeatherDataOverviewComponent: React.FC = () => {
 
     const applicationContext = useApplicationContext()

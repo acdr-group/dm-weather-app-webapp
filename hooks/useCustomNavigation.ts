@@ -15,6 +15,11 @@ type SideNavigationButton = {
 type Output = {
     navButtons: SideNavigationButton[]
 }
+
+/**
+ * Returns custom navigation buttons based on the current pathname.
+ * @returns {Output} An object containing the custom navigation buttons.
+ */
 export const useCustomNavigation = (): Output => {
     const router = useRouter()
     const pathname = usePathname()

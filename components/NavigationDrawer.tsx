@@ -12,6 +12,11 @@ import Typography from "@mui/joy/Typography";
 import List from "@mui/joy/List";
 import {useCustomNavigation} from "@/hooks/useCustomNavigation";
 
+/**
+ * Creates a navigation drawer component.
+ *
+ * @returns {ReactElement} The navigation drawer component.
+ */
 export default function NavigationDrawer() {
     const [open, setOpen] = React.useState(false);
     const { navButtons } = useCustomNavigation();

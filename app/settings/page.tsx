@@ -26,6 +26,13 @@ import {customThemes} from "@/theme/customThemes";
 
 type Props = {}
 
+/**
+ * Represents a page for application settings.
+ *
+ * @component
+ * @param {Props} props - The properties passed to the component.
+ * @returns {React.ReactElement} The rendered component.
+ */
 const SettingPage: React.FC<Props> = (props: Props) => {
     return (
         <PageLayoutComponent title={"Einstellungen"}>
@@ -45,6 +52,11 @@ type PropsSettingSection = {
     sectionTitle: string
     settingItemList: SettingItem[]
 }
+
+/**
+ * Represents a setting section component.
+ * @component
+ */
 const SettingSectionComponent: React.FC<PropsSettingSection> = (props: PropsSettingSection) => {
     return (
         <Box sx={settingSectionContainer}>
@@ -66,6 +78,11 @@ const SettingSectionComponent: React.FC<PropsSettingSection> = (props: PropsSett
     )
 }
 
+/**
+ * Represents the DataSourceSettings component in React.
+ *
+ * @component
+ */
 const DataSourceSettings: React.FC = () => {
 
     const theme = useTheme()
@@ -96,6 +113,11 @@ const DataSourceSettings: React.FC = () => {
     )
 }
 
+/**
+ * Represents the ThemeSettings component.
+ *
+ * @component
+ */
 const ThemeSettings: React.FC = () => {
 
     const theme = useTheme()

@@ -5,6 +5,14 @@ import {SxProps} from "@mui/system";
 import Image from "next/image";
 import CompanyLogo from "../../public/dm-logo.svg";
 
+/**
+ * Represents a component displaying the company logo.
+ * @component
+ * @return {React.FC} CompanyLogoComponent
+ * @example
+ * // Usage of CompanyLogoComponent
+ * <CompanyLogoComponent />
+ */
 const CompanyLogoComponent: React.FC = () => {
     return (
         <Box sx={logoContainer}>

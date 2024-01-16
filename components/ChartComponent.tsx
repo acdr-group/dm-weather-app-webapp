@@ -20,6 +20,14 @@ type PropsChart = {
     horizontalAxisLabel: string
     unit: string
 }
+
+/**
+ * A React functional component that renders a chart.
+ *
+ * @component
+ * @param {PropsChart} props - The props for the ChartComponent.
+ * @returns {ReactNode} The rendered chart component.
+ */
 const ChartComponent: React.FC<PropsChart> = (props: PropsChart) => {
 
     const theme = useTheme()

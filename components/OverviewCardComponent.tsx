@@ -14,6 +14,13 @@ type Props = {
     currentTemperatureAndUnit: string
     temperaturesForPeriodsOfTheDay: TemperaturesForPeriodsOfTheDay[]
 }
+
+/**
+ * Represents an overview card component.
+ * @function OverviewCardComponent
+ * @param {Object} props - The props object containing data for the component.
+ * @returns {React.Component} - The rendered OverviewCardComponent.
+ */
 const OverviewCardComponent: React.FC<Props> = (props: Props) => {
     return (
         <Card

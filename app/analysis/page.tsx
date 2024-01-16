@@ -22,6 +22,12 @@ enum Sensor {
     Luftfeuchtigkeit = "Luftfeuchtigkeit",
 }
 
+/**
+ * Represents the Analysis page component.
+ *
+ * @typedef {React.FC} AnalysisPage
+ * @returns {ReactNode} The rendered AnalysisPage component.
+ */
 const AnalysisPage: React.FC = () => {
     const applicationContext = useApplicationContext()
 

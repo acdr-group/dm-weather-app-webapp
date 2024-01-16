@@ -11,6 +11,14 @@ type Props = {
     children: (containerSize: ContainerSize) => React.ReactNode
 }
 
+/**
+ * ResponsivSizingComponent is a React functional component that provides responsive sizing behavior to its children.
+ *
+ * @param {object} props - The component props
+ * @param {ContainerSize} props.initialSize - The initial size of the container
+ * @param {function} props.children - The render function for the children that takes the container size as an argument
+ * @returns {React.Element} - The rendered component
+ */
 const ResponsivSizingComponent: React.FC<Props> = (props: Props) => {
 
     const containerRef = useRef<HTMLDivElement | null>(null)

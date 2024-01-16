@@ -12,6 +12,11 @@ import {usePathname, useRouter} from "next/navigation";
 import Typography from "@mui/joy/Typography";
 import {useCustomNavigation} from "@/hooks/useCustomNavigation";
 
+/**
+ * Represents a side navigation component.
+ *
+ * @returns {React.Element} The rendered side navigation component.
+ */
 const SideNavigationComponent = () => {
     const { navButtons } = useCustomNavigation();
 

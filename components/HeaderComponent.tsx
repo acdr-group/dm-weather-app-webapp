@@ -12,13 +12,19 @@ import NotificationDrawerComponent from "@/components/NotificationDrawerComponen
 import {AppNotification} from "@/models/notification";
 import NavigationDrawer from "@/components/NavigationDrawer";
 
+/**
+ * HeaderComponent is a functional component in React that represents the header of an application.
+ * It renders a Sheet component with a navbar and some icons.
+ *
+ * @returns JSX.Element
+ */
 const HeaderComponent: React.FC = () => {
     const { enterFullScreen } = useFullScreen()
 
     const notifications: AppNotification[] = [
         {
             id: "f01c2015-fb8b-4b0f-ac67-a07fc1b5b55b",
-            title: "Willkommen in der dmTech-Wetter-App",
+            title: "Willkommen in der dmTECH-Wetter-App",
             message: "Entdecke eine neue Dimension der Wettervorhersage – immer aktuell und zuverlässig",
             type: "info",
             creationDate: new Date(),
